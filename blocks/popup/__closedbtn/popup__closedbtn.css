@@ -1,4 +1,4 @@
-.popup_closed {
+.popup__closedbtn {
     background: url(../../../images/CloseIcon.svg);
     background-size: contain;
     background-repeat: no-repeat;
