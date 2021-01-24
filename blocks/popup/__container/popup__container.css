@@ -1,0 +1,32 @@
+.popup__container {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    width: calc(100%/3);
+    max-height: 330px;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 195px;
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    outline: none;
+    z-index: 5;
+    font-family: "Inter", sans-serif;
+}
+
+@media screen and (max-width: 1140px) {
+    .popup__container {
+        max-height: 345px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .popup__container {
+        top: 123px;
+        max-height: 322px;
+        width: calc(100%/1.1);
+    }
+}

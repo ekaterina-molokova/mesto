@@ -1,20 +1,27 @@
-.content {
+.footer {
     margin: 0 auto;
-    padding: 0 200px 0;
+    padding: 66px 200px 60px;
     box-sizing: border-box;
     width: 100%;
 }
 
 @media screen and (max-width: 1100px) {
-    .content {
+    .footer {
         padding-right: 100px;
         padding-left: 100px;
     }
 }
 
 @media screen and (max-width: 900px) {
-    .content {
+    .footer {
         padding-right: 19px;
         padding-left: 19px;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .footer {
+        padding: 48px 19px 36px;
+    }
+}
+

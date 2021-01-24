@@ -5,3 +5,16 @@
     width: calc(100%/6.2);
     justify-self: start;
 }
+
+@media screen and (max-width: 1024px) {
+    .logo {
+        width: calc(100%/4.5);
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .logo {
+        padding-left: 27px;
+        width: calc(100%/3);
+    }
+}

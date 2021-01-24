@@ -3,19 +3,93 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="#">
-        <meta name="keywords" content="#">
+        <meta name="description" content="Интерактивный сайт с фотографиями разных мест России; фото можно добавлять, удалять и лайкать">
+        <meta name="keywords" content="Россия, места, регионы, города, достопримечательности">
         <link rel="stylesheet" href="./pages/index.css">
         <title>Mesto Russia</title>
     </head>
-    <body>
+    <body class="body">
         <div class="page">
             <header class="header">
                 <img class="logo" src="./images/Vector.svg" alt="Логотип Mesto Russia">
-                <img class="line" src="./images/Line.svg" alt="Разделительная линия">
+                <div class="line"></div>
             </header>
-            <main class="content"></main>
-            <footer class="footer"></footer>
+            <main class="content">
+                <section class="profile">
+                    <div class="profile__person">
+                        <img class="profile__avatar" src="./images/avatar.svg" alt="Фото профиля">
+                        <div class="profile__info">
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <p class="profile__job">Исследователь океана</p>
+                            <div class="profile__editbtn">
+                                <div class="profile__pencil"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile__addbtn">
+                        <div class="profile__plus"></div>
+                    </div>
+                </section>
+                <section class="elements">
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1088404-unsplash.png" alt="Фото Карачаевска">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Карачаевск</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1404681-unsplash.png" alt="Фото горы Эльбрус">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Эльбрус</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1556355-unsplash.png" alt="Фото Домбая">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Домбай</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1404681-unsplash.png" alt="Фото горы Эльбрус">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Эльбрус</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1556355-unsplash.png" alt="Фото Домбая">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Домбай</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                    <figure class="elements__element">
+                        <img class="elements__photo" src="./images/kirill-pershin-1088404-unsplash.png" alt="Фото Карачаевска">
+                        <figcaption class="elements__figcaption">
+                            <p class="elements__title">Карачаево-Черкессия</p>
+                            <div class="elements__likebtn"></div>
+                        </figcaption>
+                    </figure>
+                </section>
+            </main>
+            <footer class="footer">
+                <p class="copyright">&copy; 2020 Mesto Russia</p>
+            </footer>
         </div>
+        <section class="popup">
+            <form class="popup__container">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <fieldset class="popup__fields">
+                    <input class="popup__field popup__name" type="text" value="Жак-Ив Кусто" placeholder="Имя">
+                    <input class="popup__field popup__job" type="text" value="Исследователь океана" placeholder="О себе">
+                </fieldset>
+                <button class="popup_submit" type="submit" value="Сохранить">Сохранить</button>
+                <button class="popup_closed"></button>
+            </form>
+        </section>
+        <script src="index.js"></script>
     </body>
     </html>

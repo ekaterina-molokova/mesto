@@ -1,0 +1,27 @@
+.popup_submit {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    background: #000000;
+    border-radius: 2px;
+    min-height: 50px;
+    width: calc(100%/1.2);
+    color: #ffffff;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.22;
+    text-align-last: center;
+    font-family: inherit;
+}
+
+.popup_submit:hover {
+    opacity: .8;
+}
+
+@media screen and (max-width: 768px) {
+    .popup_submit {
+        font-size: 14px;
+        text-align: center;
+    }
+}

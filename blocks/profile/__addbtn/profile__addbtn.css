@@ -1,0 +1,25 @@
+.profile__addbtn {
+    margin: 0;
+    padding: 14px 0;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 2px solid #ffffff;
+    width: calc(100%/5.9);
+    max-height: 50px;
+    display: flex;
+    align-self: center;
+}
+
+.profile__addbtn:hover {
+    opacity: .6;
+    transition: opacity 2s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__addbtn {
+        margin-top: 36px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+        width: 100%;
+    }
+}
