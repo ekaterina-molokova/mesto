@@ -1,16 +1,22 @@
 .profile {
-    margin: 0 auto;
+    margin: 0;
     padding: 40px 0 50px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content) 1fr;
+    grid-template-areas:
+    "avatar info addbtn";
 }
 
 @media screen and (max-width: 768px) {
     .profile {
-        flex-direction: column;
-        justify-content: start;
         padding-bottom: 36px;
+        grid-template-rows: repeat(3, minmax(min-content, max-content));
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "avatar"
+        "info"
+        "addbtn";
     }
 }

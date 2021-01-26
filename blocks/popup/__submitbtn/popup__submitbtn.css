@@ -3,9 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     background: #000000;
+    border: none;
+    outline: none;
     border-radius: 2px;
     min-height: 50px;
-    width: calc(100%/1.2);
+    width: 100%;
     color: #ffffff;
     font-style: normal;
     font-weight: normal;
@@ -13,14 +15,15 @@
     line-height: 1.22;
     text-align-last: center;
     font-family: inherit;
+    cursor: pointer;
 }
 
-.popup_submit:hover {
+.popup__submitbtn:hover {
     opacity: .8;
 }
 
 @media screen and (max-width: 768px) {
-    .popup_submit {
+    .popup__submitbtn {
         font-size: 14px;
         text-align: center;
     }

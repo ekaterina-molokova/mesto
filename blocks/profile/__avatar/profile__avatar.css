@@ -1,4 +1,5 @@
 .profile__avatar {
+    grid-area: avatar;
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;

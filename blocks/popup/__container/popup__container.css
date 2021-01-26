@@ -1,14 +1,15 @@
 .popup__container {
     margin: 0 auto;
-    padding: 0;
+    padding: 34px 36px 37px;
     box-sizing: border-box;
     width: calc(100%/3);
-    max-height: 330px;
     max-width: 430px;
-    display: flex;
+    display: block;
     flex-direction: column;
-    position: relative;
-    top: 195px;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     background: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.15);
     border-radius: 10px;
@@ -17,16 +18,17 @@
     font-family: "Inter", sans-serif;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1100px) {
     .popup__container {
-        max-height: 345px;
+        width: calc(100% - 200px);
     }
+
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .popup__container {
-        top: 123px;
-        max-height: 322px;
-        width: calc(100%/1.1);
+        padding: 25px 22px;
+        width: calc(100% - 38px);
+        top: 10%;
     }
 }

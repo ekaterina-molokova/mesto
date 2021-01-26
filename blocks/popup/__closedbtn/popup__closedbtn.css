@@ -12,15 +12,16 @@
     min-width: 40px;
     min-height: 40px;
     border: none;
+    cursor: pointer;
 }
 
-.popup_closed:hover {
+.popup__closedbtn:hover {
     opacity: .6;
     transition: opacity 2s ease;
 }
 
 @media screen and (max-width: 768px) {
-    .popup_closed {
+    .popup__closedbtn {
         right: 0;
         min-width: 26px;
         min-height: 26px;

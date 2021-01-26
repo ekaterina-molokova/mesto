@@ -12,65 +12,58 @@
         <div class="page">
             <header class="header">
                 <img class="logo" src="./images/Vector.svg" alt="Логотип Mesto Russia">
-                <div class="line"></div>
             </header>
             <main class="content">
                 <section class="profile">
-                    <div class="profile__person">
-                        <img class="profile__avatar" src="./images/avatar.svg" alt="Фото профиля">
-                        <div class="profile__info">
-                            <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <p class="profile__job">Исследователь океана</p>
-                            <div class="profile__editbtn">
-                                <div class="profile__pencil"></div>
-                            </div>
-                        </div>
+                    <img class="profile__avatar" src="./images/avatar.jpg" alt="Фото профиля">
+                    <div class="profile__info">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <p class="profile__job">Исследователь океана</p>
+                        <button class="profile__editbtn"></button>
                     </div>
-                    <div class="profile__addbtn">
-                        <div class="profile__plus"></div>
-                    </div>
+                    <button class="profile__addbtn"></button>
                 </section>
                 <section class="elements">
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1088404-unsplash.png" alt="Фото Карачаевска">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Карачаевск</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Карачаевск</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1404681-unsplash.png" alt="Фото горы Эльбрус">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Эльбрус</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Эльбрус</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1556355-unsplash.png" alt="Фото Домбая">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Домбай</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Домбай</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1404681-unsplash.png" alt="Фото горы Эльбрус">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Эльбрус</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Эльбрус</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1556355-unsplash.png" alt="Фото Домбая">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Домбай</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Домбай</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                     <figure class="elements__element">
                         <img class="elements__photo" src="./images/kirill-pershin-1088404-unsplash.png" alt="Фото Карачаевска">
                         <figcaption class="elements__figcaption">
-                            <p class="elements__title">Карачаево-Черкессия</p>
-                            <div class="elements__likebtn"></div>
+                            <h2 class="elements__title">Карачаево-Черкессия</h2>
+                            <button class="elements__likebtn"></button>
                         </figcaption>
                     </figure>
                 </section>
@@ -80,16 +73,16 @@
             </footer>
         </div>
         <section class="popup">
-            <form class="popup__container">
+            <form name="profileinfo" class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <fieldset class="popup__fields">
-                    <input class="popup__field popup__name" type="text" value="Жак-Ив Кусто" placeholder="Имя">
-                    <input class="popup__field popup__job" type="text" value="Исследователь океана" placeholder="О себе">
+                    <input class="popup__field popup__name" type="text" value="Жак-Ив Кусто" name="name" placeholder="Имя">
+                    <input class="popup__field popup__job" type="text" value="Исследователь океана" name="job" placeholder="О себе">
                 </fieldset>
                 <button class="popup__submitbtn" type="submit" value="Сохранить">Сохранить</button>
                 <button class="popup__closedbtn"></button>
             </form>
         </section>
-        <script src="index.js"></script>
+        <script src="./scripts/index.js"></script>
     </body>
     </html>

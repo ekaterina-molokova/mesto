@@ -9,9 +9,12 @@
     align-self: center;
     width: calc(100%/11.18);
     height: calc(100%/1.21);
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
 
 .elements__likebtn:hover {
-    opacity: .6;
+    opacity: .5;
     transition: opacity 2s ease;
 }
