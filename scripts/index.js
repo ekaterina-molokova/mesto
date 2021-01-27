@@ -13,14 +13,10 @@ function openPopup() {
     jobInput.value = profileJob.textContent;
 }
 
-editBtn.addEventListener('click', openPopup);
-
 function closePopup(evt) {
     evt.preventDefault();
     popup.classList.remove("popup_opened");
 }
-
-closeBtn.addEventListener('click', closePopup);
 
 function submitPopup(evt) {
     evt.preventDefault();           
@@ -30,5 +26,6 @@ function submitPopup(evt) {
     profileJob.textContent = jobInput.value;
     popup.classList.remove("popup_opened");
 }
-
+editBtn.addEventListener('click', openPopup);
+closeBtn.addEventListener('click', closePopup);
 form.addEventListener("submit", submitPopup);

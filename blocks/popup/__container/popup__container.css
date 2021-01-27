@@ -7,9 +7,9 @@
     display: block;
     flex-direction: column;
     position: fixed;
-    top: 15%;
+    top: 50vh;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.15);
     border-radius: 10px;
@@ -29,6 +29,5 @@
     .popup__container {
         padding: 25px 22px;
         width: calc(100% - 38px);
-        top: 10%;
     }
 }
