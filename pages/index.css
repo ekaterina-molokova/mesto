@@ -31,3 +31,4 @@
 @import url("../blocks/popup/_opened/popup_opened.css");
 @import url("../blocks/popup/__name/popup__name.css");
 @import url("../blocks/popup/__job/popup__job.css");
+@import url("../blocks/popup/__container/_opened/popup__container_opened.css");

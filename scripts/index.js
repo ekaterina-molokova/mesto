@@ -55,13 +55,24 @@ function getItem(item) {
     const elementPhoto = newItem.querySelector(".elements__photo");
     elementPhoto.src = item.link;
     elementPhoto.alt = item.alt;
+    /* const на кнопку удаления = newItem.querySelector(".#");
+    * кнопка удаления.addEventListner("click", handleDelete);  */
     return newItem;
 }
 
 render();
 
+const likeBtns = document.querySelectorAll(".elements__likebtn");
+
+likeBtns.forEach((item) => {
+    item.addEventListener('click', function() {
+        item.classList.toggle("elements__likebtn_active");
+    });
+});
+
 function openPopup() {
     popup.classList.add("popup_opened");
+    form.classList.add("popup__container_opened");
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
@@ -79,6 +90,24 @@ function submitPopup(evt) {
     profileJob.textContent = jobInput.value;
     popup.classList.remove("popup_opened");
 }
+
+/* function handleAdd() {
+1) const для value из Input - получить;
+2) const для нового фото = getItem({name/link/alt: const для value})
+    elementsContainer.prepend(const для нового фото);
+    очистить поля;
+}
+
+addBtn.addEventlistener('click', handleAdd);
+
+function handleDelete(event) {
+const targerElement = event.target;
+const targetItem = targerElement.closest(".elements__element");
+targerItem.remove();
+}
+
+*/
+
 editBtn.addEventListener('click', openPopup);
 closeBtn.addEventListener('click', closePopup);
-form.addEventListener("submit", submitPopup);
+form.addEventListener('submit', submitPopup);
