@@ -36,3 +36,5 @@
 @import url("../blocks/popup/__link/popup__link.css");
 @import url("../blocks/popup/__photoadding/popup__photoadding.css");
 @import url("../blocks/popup/__createbtn/popup__createbtn.css");
+@import url( "../blocks/elements/__picturegroup/elements__picturegroup.css");
+@import url("../blocks/elements/__deletebtn/elements__deletebtn.css");

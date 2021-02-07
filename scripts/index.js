@@ -56,8 +56,6 @@ function getItem(item) {
     const elementPhoto = newItem.querySelector(".elements__photo");
     elementPhoto.src = item.link;
     elementPhoto.alt = item.alt;
-    /* const на кнопку удаления = newItem.querySelector(".#");
-    * кнопка удаления.addEventListner("click", handleDelete);  */
     return newItem;
 }
 
@@ -116,15 +114,15 @@ function addPhoto(evt) {
     elementsContainer.prepend(newPhoto);
 }
 
-/*
+const deleteBtns = document.querySelectorAll(".elements__deletebtn");
 
-function handleDelete(event) {
-const targerElement = event.target;
-const targetItem = targerElement.closest(".elements__element");
-targerItem.remove();
-}
-
-*/
+deleteBtns.forEach((item) => {
+    item.addEventListener('click', function(event) {
+        const targetElement = event.target;
+        const targetItem = targetElement.closest(".elements__element");
+        targetItem.remove();
+    });
+});
 
 editBtn.addEventListener('click', openPopupProfile);
 form.addEventListener('submit', submitPopup);
