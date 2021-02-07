@@ -61,6 +61,23 @@ function getItem(item) {
 
 render();
 
+const photos = document.querySelectorAll(".elements__photo");
+const photoContainer = document.querySelector(".popup__photo-container");
+const widePhoto = document.querySelector(".popup__wide-photo");
+const popupFigcaption = document.querySelector(".popup__figcaption");
+
+// photos.forEach((item) => {
+//     item.addEventListener("click", function() {
+//         popup.classList.add("popup_opened");
+//         photoContainer.classList.add('popup__photo-container_opened');
+//         popup.classList.add("popup_dark");
+//         widePhoto.src = item.src;
+//         popupFigcaption.textContent = item.alt;
+//     })
+// });
+
+
+
 const likeBtns = document.querySelectorAll(".elements__likebtn");
 
 likeBtns.forEach((item) => {
@@ -69,19 +86,19 @@ likeBtns.forEach((item) => {
     });
 });
 
-function openPopupProfile() {
-    popup.classList.add("popup_opened");
-    profileInfoForm.classList.remove("popup__profileinfo");
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-}
-
 closeBtns.forEach((item) => {
     item.addEventListener('click', function(evt){
         evt.preventDefault();
         popup.classList.remove("popup_opened");
     });
 })
+
+function openPopupProfile() {
+    popup.classList.add("popup_opened");
+    profileInfoForm.classList.remove("popup__profileinfo");
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+}
 
 function submitPopup(evt) {
     evt.preventDefault();           
@@ -112,6 +129,8 @@ function addPhoto(evt) {
     const linkPhoto = linkInput.value;
     const newPhoto = getItem({name:placeName, link: linkPhoto, alt: placeName});
     elementsContainer.prepend(newPhoto);
+    popup.classList.remove("popup_opened");
+
 }
 
 const deleteBtns = document.querySelectorAll(".elements__deletebtn");

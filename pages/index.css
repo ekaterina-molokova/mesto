@@ -38,3 +38,7 @@
 @import url("../blocks/popup/__createbtn/popup__createbtn.css");
 @import url( "../blocks/elements/__picturegroup/elements__picturegroup.css");
 @import url("../blocks/elements/__deletebtn/elements__deletebtn.css");
+@import url("../blocks/popup/__photo-container/popup__photo-container.css");
+@import url("../blocks/popup/__wide-photo/popup__wide-photo.css");
+@import url("../blocks/popup/__photo-container/_opened/popup__photo-container_opened.css");
+@import url("../blocks/popup/_dark/popup_dark.css");
