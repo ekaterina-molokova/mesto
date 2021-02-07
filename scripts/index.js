@@ -1,7 +1,8 @@
 const popup = document.querySelector(".popup");
 const editBtn = document.querySelector(".profile__editbtn");
-const closeBtn = document.querySelector(".popup__closedbtn");
+const closeBtns = document.querySelectorAll(".popup__closedbtn");
 const form = document.querySelector(".popup__container");
+const profileInfoForm = document.querySelector(".popup__profileinfo");
 const nameInput = document.querySelector(".popup__name");
 const jobInput = document.querySelector(".popup__job");
 const profileName = document.querySelector(".profile__name");
@@ -70,17 +71,19 @@ likeBtns.forEach((item) => {
     });
 });
 
-function openPopup() {
+function openPopupProfile() {
     popup.classList.add("popup_opened");
-    form.classList.add("popup__container_opened");
+    profileInfoForm.classList.remove("popup__profileinfo");
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
 
-function closePopup(evt) {
-    evt.preventDefault();
-    popup.classList.remove("popup_opened");
-}
+closeBtns.forEach((item) => {
+    item.addEventListener('click', function(evt){
+        evt.preventDefault();
+        popup.classList.remove("popup_opened");
+    });
+})
 
 function submitPopup(evt) {
     evt.preventDefault();           
@@ -91,14 +94,29 @@ function submitPopup(evt) {
     popup.classList.remove("popup_opened");
 }
 
-/* function handleAdd() {
-1) const для value из Input - получить;
-2) const для нового фото = getItem({name/link/alt: const для value})
-    elementsContainer.prepend(const для нового фото);
-    очистить поля;
+const addBtn = document.querySelector(".profile__addbtn");
+const photoadding = document.querySelector(".popup__photoadding");
+const placenameInput = document.querySelector(".popup__placename");
+const linkInput = document.querySelector(".popup__link");
+
+function openPopupPhoto() {
+    popup.classList.add("popup_opened");
+    photoadding.classList.remove("popup__photoadding");
+    placenameInput.value = placenameInput.placeholder;
+    linkInput.value = linkInput.placeholder;
 }
 
-addBtn.addEventlistener('click', handleAdd);
+const createBtn = document.querySelector(".popup__createbtn");
+
+function addPhoto(evt) {
+    evt.preventDefault();
+    const placeName = placenameInput.value;
+    const linkPhoto = linkInput.value;
+    const newPhoto = getItem({name:placeName, link: linkPhoto, alt: placeName});
+    elementsContainer.prepend(newPhoto);
+}
+
+/*
 
 function handleDelete(event) {
 const targerElement = event.target;
@@ -108,6 +126,7 @@ targerItem.remove();
 
 */
 
-editBtn.addEventListener('click', openPopup);
-closeBtn.addEventListener('click', closePopup);
+editBtn.addEventListener('click', openPopupProfile);
 form.addEventListener('submit', submitPopup);
+addBtn.addEventListener("click", openPopupPhoto);
+createBtn.addEventListener("click", addPhoto);
