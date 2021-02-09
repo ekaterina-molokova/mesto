@@ -110,8 +110,8 @@ closeBtns.forEach((item) => {
                 photoadding.classList.add("popup__photoadding");
                 jobInput.value = jobInput.textContent;
                 nameInput.value = nameInput.textContent;
-                placenameInput.value = "";
-                linkInput.textContent = "";
+                placenameInput.value = " ";
+                linkInput.value = " ";
             }, 1000);
         }
     });
@@ -149,6 +149,8 @@ function addPhoto(evt) {
     const linkPhoto = linkInput.value;
     const newPhoto = getItem({name:placeName, link: linkPhoto, alt: placeName});
     elementsContainer.prepend(newPhoto);
+    placenameInput.value = " ";
+    linkInput.value = " ";
     closePopup(evt);
 }
 
