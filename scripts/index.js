@@ -65,6 +65,15 @@ function getItem(item) {
         const targetItem = targetElement.closest(".elements__element");
         targetItem.remove();
     });
+    elementPhoto.addEventListener("click", function() {
+        openPopup();
+        popup.classList.add("popup_dark");
+        document.querySelector(".popup__photo-container").classList.add('popup__photo-container_opened');
+        document.querySelector(".popup__wide-photo").src = item.link;
+        document.querySelector(".popup__wide-photo").alt = item.alt;
+        document.querySelector(".popup__figcaption").textContent = item.name;
+    });
+
     return newCard;
 }
 
@@ -83,26 +92,16 @@ function closePopup(evt) {
     }, 2000);
 }
 
-
-const elementPhotos = document.querySelectorAll(".elements__photo");
-
-elementPhotos.forEach((item) => {
-    item.addEventListener("click", function() {
-         openPopup();
-         popup.classList.add("popup_dark");
-         document.querySelector(".popup__photo-container").classList.add('popup__photo-container_opened');
-         document.querySelector(".popup__wide-photo").src = item.src;
-         document.querySelector(".popup__wide-photo").alt = item.alt;
-         document.querySelector(".popup__figcaption").textContent = item.name;
-     })
-});
-
 const closeBtns = document.querySelectorAll(".popup__closedbtn");
+const addBtn = document.querySelector(".profile__addbtn");
+const photoadding = document.querySelector(".popup__photoadding");
+const placenameInput = document.querySelector(".popup__placename");
+const linkInput = document.querySelector(".popup__link");
 
 closeBtns.forEach((item) => {
     item.addEventListener('click', function (evt) {
         closePopup(evt);
-        if (elementPhotos || profileInfoForm || photoadding) {
+        if (initialCards || profileInfoForm || photoadding) {
             setTimeout(function() {
                 document.querySelector(".popup__photo-container").classList.remove('popup__photo-container_opened');
                 popup.classList.remove("popup_dark");
@@ -131,14 +130,11 @@ function submitPopup(evt) {
     closePopup(evt);
 }
 
-const addBtn = document.querySelector(".profile__addbtn");
-const photoadding = document.querySelector(".popup__photoadding");
-const placenameInput = document.querySelector(".popup__placename");
-const linkInput = document.querySelector(".popup__link");
-
 function openPhotoForm() {
     openPopup();
     photoadding.classList.remove("popup__photoadding");
+    console.log(placenameInput.textContent, linkInput.textContent);
+    console.log(placenameInput.placeholder, linkInput.placeholder);
     placenameInput.textContent = placenameInput.placeholder;
     linkInput.textContent = linkInput.placeholder;
 }
@@ -147,10 +143,11 @@ function addPhoto(evt) {
     evt.preventDefault();
     const placeName = placenameInput.value;
     const linkPhoto = linkInput.value;
+    console.log(placeName, linkPhoto);
     const newPhoto = getItem({name:placeName, link: linkPhoto, alt: placeName});
     elementsContainer.prepend(newPhoto);
-    placenameInput.value = " ";
-    linkInput.value = " ";
+    placenameInput.value = "";
+    linkInput.value = "";
     closePopup(evt);
 }
 
