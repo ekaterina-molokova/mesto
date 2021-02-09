@@ -1,5 +1,4 @@
 .popup {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -10,4 +9,16 @@
     box-sizing: border-box;
     background: rgba(0, 0, 0, .5);
     z-index: 3;
+    animation: fadeout 2s ease forwards;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

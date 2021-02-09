@@ -1,3 +1,7 @@
 .popup__link {
+    color: #000000;
+}
+
+.popup__link::placeholder {
     color: #C4C4C4;
 }
