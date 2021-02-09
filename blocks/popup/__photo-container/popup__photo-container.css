@@ -1,10 +1,9 @@
 .popup__photo-container {
     display: none;
-    margin: auto;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    max-width: 540px;
-    max-height: 430px;
+    max-width: 75vw;
     flex-direction: column;
     position: fixed;
     top: 50vh;
