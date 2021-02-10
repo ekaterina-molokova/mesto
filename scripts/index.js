@@ -1,10 +1,8 @@
-const popupContainers = document.querySelectorAll(".popup__container");
 const profileInfoForm = document.querySelector(".popup__profile-info-form");
 const photoAddingForm = document.querySelector(".popup__photo-adding-form");
 const viewingPhotoForm = document.querySelector(".popup__viewing-photo");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
-const closedBtns = document.querySelectorAll(".popup__closedbtn");
 const nameInput = document.querySelector(".popup__name");
 const jobInput = document.querySelector(".popup__job");
 const profileName = document.querySelector(".profile__name");
@@ -73,7 +71,9 @@ function getItem(item) {
     elementPhoto.addEventListener("click", function() {
         openViewingPhotoForm ();
         viewingPhotoForm.setAttribute("style", "background: rgba(0, 0, 0, .9)");
-        popupContainers[2].classList.add("popup__photo-container");
+        const viewingPhotoContainer = viewingPhotoForm.querySelector(".popup__container");
+        viewingPhotoContainer.classList.remove(".popup__container");
+        viewingPhotoContainer.classList.add("popup__photo-container");
         const widePhoto = document.querySelector(".popup__wide-photo");
         widePhoto.src = item.link;
         widePhoto.alt = item.alt;
@@ -98,8 +98,8 @@ function openProfileInfoForm () {
 
 function openPhotoAddingForm () {
     openPopup(photoAddingForm);
-    placeNameInput.value = " ";
-    linkInput.value = " ";
+    placeNameInput.value = "";
+    linkInput.value = "";
 }
 
 function openViewingPhotoForm () {
@@ -121,25 +121,32 @@ function closePhotoAddingForm () {
 function closeViewingPhotoForm () {
     closePopup(viewingPhotoForm);
 }
+function submitPopup (evt) {
+    evt.preventDefault();
+}
 
 function submitProfileInfoForm (evt) {
-    evt.preventDefault();
+    submitPopup (evt);
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closeProfileInfoForm ();
 }
 
 function addPhoto (evt) {
-    evt.preventDefault();
+    submitPopup (evt);
     const newPhoto = getItem({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value});
     elementsContainer.prepend(newPhoto);
     closePhotoAddingForm ();
 }
 
+const closedBtnProfile = profileInfoForm.querySelector(".popup__closedbtn");
+const closedBtnPhoto = photoAddingForm.querySelector(".popup__closedbtn");
+const closedBtnWidePhoto = viewingPhotoForm.querySelector(".popup__closedbtn");
+
 editBtn.addEventListener("click", openProfileInfoForm);
 addBtn.addEventListener("click", openPhotoAddingForm);
-closedBtns[0].addEventListener("click", closeProfileInfoForm);
-closedBtns[1].addEventListener("click", closePhotoAddingForm);
-closedBtns[2].addEventListener("click", closeViewingPhotoForm);
+closedBtnProfile.addEventListener("click", closeProfileInfoForm);
+closedBtnPhoto.addEventListener("click", closePhotoAddingForm);
+closedBtnWidePhoto.addEventListener("click", closeViewingPhotoForm);
 profileInfoForm.addEventListener("submit", submitProfileInfoForm);
 photoAddingForm.addEventListener("submit", addPhoto);

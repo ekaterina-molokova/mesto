@@ -2,8 +2,7 @@
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    max-width: 75vw;
-    max-height: 75vh;
+    width: 100%;
     object-fit: contain;
     object-position: center;
     background-repeat: no-repeat;
