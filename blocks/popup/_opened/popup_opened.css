@@ -1,7 +1,7 @@
 .popup_opened {
     display: block;
     opacity: 1;
-    animation: fadein 2s ease forwards;
+    animation: fadein 200ms ease forwards;
 }
 
 @keyframes fadein {

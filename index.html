@@ -43,8 +43,8 @@
                 <p class="copyright">&copy; 2020 Mesto Russia</p>
             </footer>
         </div>
-        <section class="popup">
-            <form name="profileinfo" class="popup__container popup__profileinfo">
+        <section class="popup popup__profile-info-form">
+            <form class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <fieldset class="popup__fields">
                     <input class="popup__field popup__name" type="text" value="Катерина Молокова" name="name" placeholder="Имя">
@@ -53,20 +53,24 @@
                 <button class="popup__submitbtn" type="submit" value="Сохранить">Сохранить</button>
                 <button class="popup__closedbtn" type="button"></button>
             </form>
-           <form name="photoadding" class="popup__container popup__photoadding">
+        </section>
+        <section class="popup popup__photo-adding-form">
+            <form class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
                 <fieldset class="popup__fields">
                     <input class="popup__field popup__placename" type="text" name="placename" placeholder="Название места">
                     <input class="popup__field popup__link" type="url" name="link" placeholder="Ссылка на картинку">
                 </fieldset>
-                <button class="popup__createbtn" type="submit" value="Создать">Создать</button>
+                <button class="popup__submitbtn" type="submit" value="Создать">Создать</button>
                 <button class="popup__closedbtn" type="button"></button>
             </form>
-                <figure class="popup__photo-container">
+        </section>
+        <section class="popup popup__viewing-photo">
+            <figure class="popup__container">
                     <button class="popup__closedbtn" type="button"></button>
                     <img class="popup__wide-photo" src="#" alt="#">
                     <figcaption class="popup__figcaption"></figcaption>
-                </figure>
+            </figure>
         </section>
     </body>
     </html>
