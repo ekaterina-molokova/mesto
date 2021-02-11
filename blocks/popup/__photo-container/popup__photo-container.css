@@ -3,9 +3,9 @@
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    max-width: 75vw;
-    max-height: 75vh;
+    flex-direction: column;
     position: fixed;
+    max-width: 75vw;
     top: 50vh;
     left: 50%;
     transform: translate(-50%, -50%);

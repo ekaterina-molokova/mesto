@@ -1,6 +1,7 @@
 const profileInfoForm = document.querySelector(".popup__profile-info-form");
 const photoAddingForm = document.querySelector(".popup__photo-adding-form");
 const viewingPhotoForm = document.querySelector(".popup__viewing-photo");
+const viewingPhotoContainer = viewingPhotoForm.querySelector(".popup__container");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
 const nameInput = document.querySelector(".popup__name");
@@ -71,8 +72,7 @@ function getItem(item) {
     elementPhoto.addEventListener("click", function() {
         openViewingPhotoForm ();
         viewingPhotoForm.setAttribute("style", "background: rgba(0, 0, 0, .9)");
-        const viewingPhotoContainer = viewingPhotoForm.querySelector(".popup__container");
-        viewingPhotoContainer.classList.remove(".popup__container");
+        viewingPhotoContainer.classList.remove("popup__container");
         viewingPhotoContainer.classList.add("popup__photo-container");
         const widePhoto = document.querySelector(".popup__wide-photo");
         widePhoto.src = item.link;
@@ -121,6 +121,7 @@ function closePhotoAddingForm () {
 function closeViewingPhotoForm () {
     closePopup(viewingPhotoForm);
 }
+
 function submitPopup (evt) {
     evt.preventDefault();
 }
