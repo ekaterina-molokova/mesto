@@ -1,7 +1,6 @@
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
 const viewingPhotoForm = document.querySelector(".popup_viewing-photo");
-const viewingPhotoContainer = viewingPhotoForm.querySelector(".popup__container");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
 const nameInput = document.querySelector(".popup__name");
@@ -12,6 +11,11 @@ const placeNameInput = document.querySelector(".popup__placename");
 const linkInput = document.querySelector(".popup__link");
 const elementsContainer = document.querySelector(".elements");
 const templateElement = document.querySelector(".template");
+const widePhoto = document.querySelector(".popup__wide-photo");
+const widePhotoFigcaption = document.querySelector(".popup__figcaption");
+const closedBtnProfile = profileInfoForm.querySelector(".popup__closedbtn");
+const closedBtnPhoto = photoAddingForm.querySelector(".popup__closedbtn");
+const closedBtnWidePhoto = viewingPhotoForm.querySelector(".popup__closedbtn");
 const initialCards = [
     {
         name: 'Архыз',
@@ -71,13 +75,8 @@ function getItem(item) {
     });
     elementPhoto.addEventListener("click", function() {
         openViewingPhotoForm ();
-        viewingPhotoForm.setAttribute("style", "background: rgba(0, 0, 0, .9)");
-        viewingPhotoContainer.classList.remove("popup__container");
-        viewingPhotoContainer.classList.add("popup__photo-container");
-        const widePhoto = document.querySelector(".popup__wide-photo");
         widePhoto.src = item.link;
         widePhoto.alt = item.alt;
-        const widePhotoFigcaption = document.querySelector(".popup__figcaption");
         widePhotoFigcaption.textContent = item.name;
     });
 
@@ -139,10 +138,6 @@ function addPhoto (evt) {
     elementsContainer.prepend(newPhoto);
     closePhotoAddingForm ();
 }
-
-const closedBtnProfile = profileInfoForm.querySelector(".popup__closedbtn");
-const closedBtnPhoto = photoAddingForm.querySelector(".popup__closedbtn");
-const closedBtnWidePhoto = viewingPhotoForm.querySelector(".popup__closedbtn");
 
 editBtn.addEventListener("click", openProfileInfoForm);
 addBtn.addEventListener("click", openPhotoAddingForm);
