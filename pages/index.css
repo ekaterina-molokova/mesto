@@ -41,3 +41,14 @@
 @import url("../blocks/popup/__photo-adding-form/popup__photo-adding-form.css");
 @import url("../blocks/popup/__viewing-photo/popup__viewing-photo.css");
 @import url("../blocks/popup/__photo-container/popup__photo-container.css");
+@import url("../blocks/popup/__submitbtn/_disabled/popup__submitbtn_disabled.css");
+@import url("../blocks/popup/__field/_type/_error/popup__field_type_error.css");
+@import url("../blocks/popup/__field-error/popup__field-error.css");
+@import url("../blocks/popup/__name-input-error/popup__name-input-error.css");
+@import url("../blocks/popup/__link-input-error/popup__link-input-error.css");
+@import url("../blocks/popup/__job-input-error/popup__job-input-error.css");
+@import url("../blocks/popup/__placename-input-error/popup__placename-input-error.css");
+@import url("../blocks/popup/__name-input-error/_active/popup__name-input-error_active.css");
+@import url("../blocks/popup/__job-input-error/_active/popup__job-input-error_active.css");
+@import url("../blocks/popup/__link-input-error/_active/popup__link-input-error_active.css");
+@import url("../blocks/popup/__placename-input-error/_active/popup__placename-input-error_active.css");
