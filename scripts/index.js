@@ -3,7 +3,7 @@ const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const profileTextInputs = profileInfoForm.querySelectorAll("input[type=text]");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
 const photoAddingFormTextInputs = photoAddingForm.querySelectorAll("input[type=text]");
-const viewingPhotoForm = document.querySelector(".popup__viewing-photo");
+const viewingPhotoForm = document.querySelector(".popup_viewing-photo");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
 const nameInput = document.querySelector(".popup__name");
