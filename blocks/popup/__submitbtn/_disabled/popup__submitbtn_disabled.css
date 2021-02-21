@@ -4,3 +4,8 @@
     color: #000000;
     border: 1px solid #000000;
 }
+
+.popup__submitbtn_disabled:hover {
+    opacity: .2;
+    cursor: none;
+}

@@ -1,9 +1,8 @@
-
 const showInputError = (formElement, formInput, errorMessage) => {
     const errorElement = formElement.querySelector(`#${formInput.id}-error`);
-    formInput.classList.add("popup__field_type_error");
     errorElement.textContent = errorMessage;
     errorElement.classList.add("popup__input-error-message_active");
+    formInput.classList.add("popup__field_type_error");
 }
 
 const hideInputError = (formElement, formInput) => {
@@ -37,10 +36,10 @@ const toggleButtonState = (inputList, buttonElement) => {
     }
 }
 
-const setEventListeners = (formElement) => {
-    const formInputs = document.querySelectorAll(".popup__field");
-    const buttonElement = formElement.querySelector(".popup__submitbtn");
+const setEventListeners = (formElement, inputSelector) => {
+    const formInputs = formElement.querySelectorAll(inputSelector);
     const inputList = Array.from(formInputs);
+    const buttonElement = formElement.querySelector(".popup__submitbtn");
     inputList.forEach((formInput) => {
         formInput.addEventListener("input", () => {
             isValid(formElement, formInput);
@@ -50,29 +49,22 @@ const setEventListeners = (formElement) => {
     toggleButtonState(inputList, buttonElement);
 }
 
-const enableValidation = () => {
-    const formElements = document.querySelectorAll(".popup__container");
+const enableValidation = ({formSelector, inputSelector}) => {
+    const formElements = document.querySelectorAll(formSelector);
     const formList = Array.from(formElements);
     formList.forEach((formElement) => {
         formElement.addEventListener("submit", function(evt) {
             evt.preventDefault();
         });
-        setEventListeners(formElement);
+        setEventListeners(formElement, inputSelector);
     });
 }
 
-enableValidation();
-
-/*
-
 enableValidation ({
     formSelector: ".popup__container",
-    formFieldsetSelector: ".popup__fields",
     inputSelector: ".popup__field",
     submitButtonSelector: ".popup__submitbtn",
     inactiveButtonClass: "popup__submitbtn_disabled",
     inputErrorClass: "popup__field_type_error",
     errorClass: "popup__input-error-message_active"
 });
-
- */
