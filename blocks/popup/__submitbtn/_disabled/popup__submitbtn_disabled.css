@@ -7,5 +7,5 @@
 
 .popup__submitbtn_disabled:hover {
     opacity: .2;
-    cursor: none;
+    cursor: default;
 }

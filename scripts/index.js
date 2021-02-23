@@ -1,4 +1,7 @@
 const popups = document.querySelectorAll(".popup");
+const Escape = {
+    key: "Escape"
+};
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const profileTextInputs = profileInfoForm.querySelectorAll("input[type=text]");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
@@ -90,9 +93,7 @@ render();
 
 function openPopup(popup) {
     popup.classList.add("popup_opened");
-    popup.tabIndex = -1;
-    popup.focus();
-    popup.addEventListener("keydown", closeViaEsc);
+    document.addEventListener("keydown", closeViaEsc);
 }
 
 function openProfileInfoForm () {
@@ -113,7 +114,9 @@ function openViewingPhotoForm () {
 
 function closePopup(popup) {
     popup.classList.remove("popup_opened");
-    popup.removeEventListener("keydown", closeViaEsc);
+    document.removeEventListener("keydown", closeViaEsc);
+    const submitBtn = popup.querySelector(".popup__submitbtn");
+    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : '';
 }
 
 function closeProfileInfoForm () {
@@ -130,7 +133,8 @@ function closeViewingPhotoForm () {
 
 function closeViaEsc (evt) {
     if (evt.key === "Escape") {
-        closePopup(evt.target);
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
     }
 }
 
