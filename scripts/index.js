@@ -1,3 +1,4 @@
+const popups = document.querySelectorAll(".popup");
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
 const viewingPhotoForm = document.querySelector(".popup_viewing-photo");
@@ -87,6 +88,7 @@ render();
 
 function openPopup(popup) {
     popup.classList.add("popup_opened");
+    document.addEventListener("keydown", closeViaEsc);
 }
 
 function openProfileInfoForm () {
@@ -107,6 +109,9 @@ function openViewingPhotoForm () {
 
 function closePopup(popup) {
     popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeViaEsc);
+    const submitBtn = popup.querySelector(".popup__submitbtn");
+    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 }
 
 function closeProfileInfoForm () {
@@ -120,6 +125,21 @@ function closePhotoAddingForm () {
 function closeViewingPhotoForm () {
     closePopup(viewingPhotoForm);
 }
+
+function closeViaEsc (evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
+    }
+}
+
+popups.forEach((item) => {
+    item.addEventListener("click", function (evt){
+        if(evt.target.classList.contains("popup")) {
+            closePopup(item);
+        }
+    });
+});
 
 function submitPopup (evt) {
     evt.preventDefault();
