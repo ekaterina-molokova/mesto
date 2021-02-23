@@ -1,11 +1,6 @@
 const popups = document.querySelectorAll(".popup");
-const Escape = {
-    key: "Escape"
-};
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
-const profileTextInputs = profileInfoForm.querySelectorAll("input[type=text]");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
-const photoAddingFormTextInputs = photoAddingForm.querySelectorAll("input[type=text]");
 const viewingPhotoForm = document.querySelector(".popup_viewing-photo");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
@@ -137,22 +132,6 @@ function closeViaEsc (evt) {
         closePopup(openedPopup);
     }
 }
-
-profileTextInputs.forEach((item) => {
-   item.addEventListener("keydown", function(evt) {
-      if(evt.key === "Enter") {
-          submitProfileInfoForm (evt);
-      }
-   });
-});
-
-photoAddingFormTextInputs.forEach((item) => {
-    item.addEventListener("keydown", function(evt) {
-        if(evt.key === "Enter") {
-            addPhoto (evt);
-        }
-    });
-});
 
 popups.forEach((item) => {
     item.addEventListener("click", function (evt){
