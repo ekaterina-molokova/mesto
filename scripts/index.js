@@ -111,7 +111,7 @@ function closePopup(popup) {
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeViaEsc);
     const submitBtn = popup.querySelector(".popup__submitbtn");
-    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : '';
+    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 }
 
 function closeProfileInfoForm () {
