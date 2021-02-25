@@ -6,11 +6,11 @@
     margin: 0 5px 0 5px;
     padding: 0;
     box-sizing: border-box;
+    align-self: center;
     /*
 
 
 
-    align-self: center;
     width: calc(100%/11.18);
     height: calc(100%/1.21);
     cursor: pointer;
