@@ -4,9 +4,10 @@
     background-size: contain;
     background-position: center;
     margin: 0 5px 0 5px;
+    padding: 0;
     /*
 
-    padding: 0;
+
     box-sizing: border-box;
     align-self: center;
     width: calc(100%/11.18);
