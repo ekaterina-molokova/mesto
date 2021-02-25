@@ -1,8 +1,8 @@
 .elements__deletebtn {
-    background-image: url("../../../images/Bin.svg");
+    background: url("../../../images/Bin.svg");
     background-repeat: no-repeat;
-    background-size: contain;
     background-position: center;
+    background-size: contain;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
