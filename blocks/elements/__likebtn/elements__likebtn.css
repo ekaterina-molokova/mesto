@@ -1,5 +1,5 @@
 .elements__likebtn {
-    background: url(../../../images/likebtn.svg);
+    background-image: url(../../../images/likebtn.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
