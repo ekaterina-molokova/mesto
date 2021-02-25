@@ -9,15 +9,9 @@
     align-self: center;
     width: calc(100%/11.18);
     height: calc(100%/1.21);
-    /*
-
-
-
-
-    height: calc(100%/1.21);
     cursor: pointer;
     border: none;
-    outline: none; */
+    outline: none;
 }
 
 .elements__likebtn:hover {
