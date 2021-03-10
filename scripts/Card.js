@@ -1,4 +1,4 @@
-import {elementsContainer, initialCards, viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
+import {elementsContainer, initialCards, widePhoto, widePhotoFigcaption} from "./data.js";
 import {openPopup} from "./index.js";
 
 class Card {
