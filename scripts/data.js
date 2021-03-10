@@ -2,7 +2,6 @@ const popups = document.querySelectorAll(".popup");
 
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
-const viewingPhotoForm = document.querySelector(".popup_viewing-photo");
 
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
@@ -21,10 +20,6 @@ const templateElement = document.querySelector(".template");
 
 const widePhoto = document.querySelector(".popup__wide-photo");
 const widePhotoFigcaption = document.querySelector(".popup__figcaption");
-
-const closedBtnProfile = profileInfoForm.querySelector(".popup__closedbtn");
-const closedBtnPhoto = photoAddingForm.querySelector(".popup__closedbtn");
-const closedBtnWidePhoto = viewingPhotoForm.querySelector(".popup__closedbtn");
 
 const initialCards = [
     {
@@ -59,7 +54,6 @@ const initialCards = [
     }
 ];
 
-export {popups, profileInfoForm, photoAddingForm, viewingPhotoForm, profileName, profileJob,
+export {popups, profileInfoForm, photoAddingForm, profileName, profileJob,
     editBtn, addBtn, nameInput, jobInput, placeNameInput, linkInput, elementsContainer,
-    templateElement, widePhoto, widePhotoFigcaption, closedBtnProfile, closedBtnPhoto, closedBtnWidePhoto,
-    initialCards}
+    templateElement, widePhoto, widePhotoFigcaption, initialCards}
