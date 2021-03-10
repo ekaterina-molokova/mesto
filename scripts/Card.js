@@ -1,4 +1,5 @@
-import {elementsContainer, initialCards} from "./data.js"
+import {elementsContainer, initialCards, viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
+import {openPopup} from "./index.js";
 
 class Card {
     constructor(data, cardSelector) {
@@ -43,6 +44,15 @@ class Card {
             const targetElement = event.target;
             const targetItem = targetElement.closest(".elements__element");
             targetItem.remove();
+        });
+        this._element
+        .querySelector(".elements__photo")
+        .addEventListener("click", () => 
+        {
+            openPopup(viewingPhotoForm);
+            widePhoto.src = this._link;
+            widePhoto.alt = this._alt;
+            widePhotoFigcaption.textContent = this._name;
         });
     }
 

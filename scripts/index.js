@@ -4,49 +4,23 @@ import {popups, profileInfoForm, photoAddingForm, viewingPhotoForm,
     closedBtnProfile, closedBtnPhoto, closedBtnWidePhoto, initialCards
 } from "./data.js"
 
-/*
-
-function render() {
-    const cards = initialCards
-        .map(getItem)
-    elementsContainer.prepend(...cards);
-}
-
-function getItem(item) {
-    const newCard = templateElement.content.cloneNode(true);
-    const elementTitle = newCard.querySelector(".elements__title");
-    elementTitle.textContent = item.name;
-    const elementPhoto = newCard.querySelector(".elements__photo");
-    elementPhoto.src = item.link;
-    elementPhoto.alt = item.alt;
-    elementPhoto.name = item.name;
-    const elementLikeBtn = newCard.querySelector(".elements__likebtn");
-    elementLikeBtn.addEventListener('click', function() {
-        elementLikeBtn.classList.toggle("elements__likebtn_active");
-    });
-    const elementDeleteBtn = newCard.querySelector(".elements__deletebtn");
-    elementDeleteBtn.addEventListener('click', function(event) {
-        const targetElement = event.target;
-        const targetItem = targetElement.closest(".elements__element");
-        targetItem.remove();
-    });
-    elementPhoto.addEventListener("click", function() {
-        openViewingPhotoForm ();
-        widePhoto.src = item.link;
-        widePhoto.alt = item.alt;
-        widePhotoFigcaption.textContent = item.name;
-    });
-
-    return newCard;
-}
-
-render();
-
-*/
-
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
+}
+
+export function closePopup(popup) {
+    popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeViaEsc);
+    const submitBtn = popup.querySelector(".popup__submitbtn");
+    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
+}
+
+export function closeViaEsc (evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
+    }
 }
 
 function openProfileInfoForm () {
@@ -65,13 +39,6 @@ function openViewingPhotoForm () {
     openPopup(viewingPhotoForm);
 }
 
-function closePopup(popup) {
-    popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", closeViaEsc);
-    const submitBtn = popup.querySelector(".popup__submitbtn");
-    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
-}
-
 function closeProfileInfoForm () {
     closePopup(profileInfoForm);
 }
@@ -82,13 +49,6 @@ function closePhotoAddingForm () {
 
 function closeViewingPhotoForm () {
     closePopup(viewingPhotoForm);
-}
-
-function closeViaEsc (evt) {
-    if (evt.key === "Escape") {
-        const openedPopup = document.querySelector(".popup_opened");
-        closePopup(openedPopup);
-    }
 }
 
 popups.forEach((item) => {
