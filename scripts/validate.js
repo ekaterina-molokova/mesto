@@ -1,3 +1,5 @@
+/*
+
 const showInputError = (formElement, formInput, errorMessage, validationSelectors) => {
     const errorElement = formElement.querySelector(`#${formInput.id}-error`);
     errorElement.textContent = errorMessage;
@@ -70,3 +72,4 @@ const validationSelectors = {
 }
 
 enableValidation(validationSelectors);
+*/

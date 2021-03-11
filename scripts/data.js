@@ -54,6 +54,15 @@ const initialCards = [
     }
 ];
 
+const validationSelectors = {
+    formSelector: ".popup__container",
+    inputSelector: ".popup__field",
+    submitButtonSelector: ".popup__submitbtn",
+    inactiveButtonClass: "popup__submitbtn_disabled",
+    inputErrorClass: "popup__field_type_error",
+    errorClass: "popup__input-error-message_active"
+}
+
 export {popups, profileInfoForm, photoAddingForm, profileName, profileJob,
     editBtn, addBtn, nameInput, jobInput, placeNameInput, linkInput, elementsContainer,
-    templateElement, widePhoto, widePhotoFigcaption, initialCards}
+    templateElement, widePhoto, widePhotoFigcaption, initialCards, validationSelectors}
