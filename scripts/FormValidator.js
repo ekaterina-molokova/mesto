@@ -1,4 +1,4 @@
-import {validationSelectors, popups} from "./data.js";
+import {validationSelectors} from "./data.js";
 
 class FormValidator {
     constructor(validationSelectors, formElement) {
