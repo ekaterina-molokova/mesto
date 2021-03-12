@@ -75,5 +75,3 @@ Array.from(document.querySelectorAll('.popup__container')).forEach((formElement)
     const formValidator = new FormValidator(validationSelectors, formElement);
     const validForm = formValidator.enableValidation();
 });
-
-

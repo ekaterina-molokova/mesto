@@ -1,5 +1,7 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
-    nameInput, jobInput, placeNameInput, linkInput, elementsContainer} from "./data.js"
+    nameInput, jobInput, placeNameInput, linkInput, elementsContainer} from "./data.js";
+
+import {Card} from "./Card.js";
 
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
@@ -56,7 +58,8 @@ function submitProfileInfoForm (evt) {
 
 function addPhoto (evt) {
     preventSubmit (evt);
-    const newPhoto = getItem({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value});
+    const photo = new Card({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value}, ".template");
+    const newPhoto = photo.generateCard();
     elementsContainer.prepend(newPhoto);
     closePopup (photoAddingForm);
 }

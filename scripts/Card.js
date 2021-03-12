@@ -1,5 +1,6 @@
 import {elementsContainer, initialCards, widePhoto, widePhotoFigcaption} from "./data.js";
 import {openPopup} from "./index.js";
+export {Card}
 
 class Card {
     constructor(data, cardSelector) {
