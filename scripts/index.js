@@ -1,21 +1,46 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
-    nameInput, jobInput, placeNameInput, linkInput, elementsContainer} from "./data.js";
+    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors} from "./data.js";
 
 import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
 
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
 }
 
+function createCard (object) {
+    const card = new Card(object, ".template");
+    const cardElement = card.generateCard();
+    return cardElement;
+}
+
+initialCards.forEach((item) => {
+    console.log(createCard(item));
+    elementsContainer.append(createCard(item));
+});
+
+Array.from(document.querySelectorAll('.popup__container'))
+.forEach((formElement) => {
+    const formValidator = new FormValidator(validationSelectors, formElement);
+    const validForm = formValidator.enableValidation();
+});
+
+function makeSubmitbtnDisabled (popup) {
+    const submitBtn = popup.querySelector(".popup__submitbtn");
+    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
+}
+
 function openProfileInfoForm () {
     openPopup(profileInfoForm);
+    makeSubmitbtnDisabled(profileInfoForm);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
 
 function openPhotoAddingForm () {
     openPopup(photoAddingForm);
+    makeSubmitbtnDisabled(photoAddingForm);
     placeNameInput.value = "";
     linkInput.value = "";
 }
@@ -23,8 +48,6 @@ function openPhotoAddingForm () {
 function closePopup(popup) {
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeViaEsc);
-    const submitBtn = popup.querySelector(".popup__submitbtn");
-    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 }
 
 function closeViaEsc (evt) {
@@ -58,9 +81,8 @@ function submitProfileInfoForm (evt) {
 
 function addPhoto (evt) {
     preventSubmit (evt);
-    const photo = new Card({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value}, ".template");
-    const newPhoto = photo.generateCard();
-    elementsContainer.prepend(newPhoto);
+    createCard ({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value});
+    elementsContainer.prepend(createCard ({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value}));
     closePopup (photoAddingForm);
 }
 

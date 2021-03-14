@@ -1,4 +1,4 @@
-import {elementsContainer, initialCards, widePhoto, widePhotoFigcaption, viewingPhotoForm} from "./data.js";
+import {widePhoto, widePhotoFigcaption, viewingPhotoForm} from "./data.js";
 import {openPopup} from "./index.js";
 export {Card}
 
@@ -63,10 +63,3 @@ class Card {
         .classList.toggle("elements__likebtn_active");
     }
 }
-
-initialCards.forEach((item) => {
-    const card = new Card(item, ".template");
-    const cardElement = card.generateCard();
-    
-    elementsContainer.append(cardElement);
-});

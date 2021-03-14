@@ -1,4 +1,5 @@
 import {validationSelectors} from "./data.js";
+export {FormValidator}
 
 class FormValidator {
     constructor(validationSelectors, formElement) {
@@ -70,8 +71,3 @@ class FormValidator {
         errorElement.classList.remove(this._errorClass);
     }
 }
-
-Array.from(document.querySelectorAll('.popup__container')).forEach((formElement) => {
-    const formValidator = new FormValidator(validationSelectors, formElement);
-    const validForm = formValidator.enableValidation();
-});
