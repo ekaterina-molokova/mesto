@@ -1,13 +1,8 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
-    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors} from "./data.js";
-
+    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
+    viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
-
-export function openPopup(popup) {
-    popup.classList.add("popup_opened");
-    document.addEventListener("keydown", closeViaEsc);
-}
 
 function createCard (object) {
     const card = new Card(object, ".template");
@@ -16,7 +11,6 @@ function createCard (object) {
 }
 
 initialCards.forEach((item) => {
-    console.log(createCard(item));
     elementsContainer.append(createCard(item));
 });
 
@@ -29,6 +23,18 @@ Array.from(document.querySelectorAll('.popup__container'))
 function makeSubmitbtnDisabled (popup) {
     const submitBtn = popup.querySelector(".popup__submitbtn");
     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
+}
+
+export function handleCardClick(link, name, alt) {
+    openPopup(viewingPhotoForm);
+    widePhoto.src = link;
+    widePhotoFigcaption.textContent = name;
+    widePhoto.alt = alt;
+  }
+  
+export function openPopup(popup) {
+    popup.classList.add("popup_opened");
+    document.addEventListener("keydown", closeViaEsc);
 }
 
 function openProfileInfoForm () {
@@ -81,8 +87,9 @@ function submitProfileInfoForm (evt) {
 
 function addPhoto (evt) {
     preventSubmit (evt);
-    createCard ({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value});
-    elementsContainer.prepend(createCard ({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value}));
+    const newPhoto = {name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value};
+    createCard (newPhoto);
+    elementsContainer.prepend(createCard (newPhoto));
     closePopup (photoAddingForm);
 }
 

@@ -70,4 +70,12 @@ class FormValidator {
         errorElement.textContent = "";
         errorElement.classList.remove(this._errorClass);
     }
+    
+    resetValidation () {
+        this._inputList.forEach((formInput) => {
+            this._hideError(formInput)
+        });
+        this._toggleButtonState();
+      }
+  
 }
