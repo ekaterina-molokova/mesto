@@ -1,4 +1,3 @@
-import {validationSelectors} from "./data.js";
 export {FormValidator}
 
 class FormValidator {
@@ -26,7 +25,6 @@ class FormValidator {
         {
             this._hideInputError(formInput);
         });
-        this._toggleButtonState();
       }
 
     _setEventListeners () {

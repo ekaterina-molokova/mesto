@@ -1,15 +1,12 @@
-import {widePhoto, widePhotoFigcaption, viewingPhotoForm} from "./data.js";
-import {openPopup} from "./index.js";
-import {handleCardClick} from "./index.js";
 export {Card}
 
 class Card {
     constructor(data, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
-        this._handleCardClick = handleCardClick;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");
@@ -50,7 +47,7 @@ class Card {
         });
         this._cardImage.addEventListener("click", () => 
         {
-            handleCardClick(this._link, this._name, this._alt);
+            this._handleCardClick(this._link, this._name, this._alt);
         });
     }
 

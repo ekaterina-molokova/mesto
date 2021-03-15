@@ -1,4 +1,4 @@
-import {popups, formsArray, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
+import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
     viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
 import {Card} from "./Card.js";
@@ -14,20 +14,18 @@ initialCards.forEach((item) => {
     elementsContainer.append(createCard(item));
 });
 
-function valideForm () {
-    formsArray.forEach((formElement) => {
-        const formValidator = new FormValidator(validationSelectors, formElement);
-        formValidator.enableValidation();
-        formValidator.resetValidation();
-    });
-}
+const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
+profileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
+addCardFormValidator.enableValidation();
 
 function makeSubmitbtnDisabled (popup) {
     const submitBtn = popup.querySelector(".popup__submitbtn");
     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 }
 
-export function handleCardClick(link, name, alt) {
+    function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
     widePhoto.src = link;
     widePhotoFigcaption.textContent = name;
@@ -37,21 +35,22 @@ export function handleCardClick(link, name, alt) {
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
-    valideForm ();
 }
 
 function openProfileInfoForm () {
     openPopup(profileInfoForm);
-    makeSubmitbtnDisabled(profileInfoForm);
+    makeSubmitbtnDisabled (profileInfoForm);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    profileFormValidator.resetValidation(); 
 }
 
 function openPhotoAddingForm () {
     openPopup(photoAddingForm);
-    makeSubmitbtnDisabled(photoAddingForm);
+    makeSubmitbtnDisabled (photoAddingForm);
     placeNameInput.value = "";
     linkInput.value = "";
+    addCardFormValidator.resetValidation();
 }
 
 function closePopup(popup) {
