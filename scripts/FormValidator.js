@@ -20,6 +20,14 @@ class FormValidator {
 
         this._setEventListeners();
     }
+    
+    resetValidation () {
+        this._inputList.forEach((formInput) =>
+        {
+            this._hideInputError(formInput);
+        });
+        this._toggleButtonState();
+      }
 
     _setEventListeners () {
         this._inputList.forEach((formInput) => 
@@ -70,12 +78,4 @@ class FormValidator {
         errorElement.textContent = "";
         errorElement.classList.remove(this._errorClass);
     }
-    
-    resetValidation () {
-        this._inputList.forEach((formInput) => {
-            this._hideError(formInput)
-        });
-        this._toggleButtonState();
-      }
-  
 }

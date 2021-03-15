@@ -1,4 +1,5 @@
 const popups = document.querySelectorAll(".popup");
+const formsArray = Array.from(document.querySelectorAll(".popup__container"));
 
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
@@ -62,6 +63,6 @@ const validationSelectors = {
     errorClass: "popup__input-error-message_active"
 }
 
-export {popups, profileInfoForm, photoAddingForm, viewingPhotoForm, profileName, profileJob,
+export {popups, formsArray, profileInfoForm, photoAddingForm, viewingPhotoForm, profileName, profileJob,
     editBtn, addBtn, nameInput, jobInput, placeNameInput, linkInput, elementsContainer,
     widePhoto, widePhotoFigcaption, initialCards, validationSelectors}

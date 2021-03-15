@@ -1,11 +1,11 @@
-import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
+import {popups, formsArray, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
     viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
 
 function createCard (object) {
-    const card = new Card(object, ".template");
+    const card = new Card(object, ".template", handleCardClick);
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -14,11 +14,13 @@ initialCards.forEach((item) => {
     elementsContainer.append(createCard(item));
 });
 
-Array.from(document.querySelectorAll('.popup__container'))
-.forEach((formElement) => {
-    const formValidator = new FormValidator(validationSelectors, formElement);
-    const validForm = formValidator.enableValidation();
-});
+function valideForm () {
+    formsArray.forEach((formElement) => {
+        const formValidator = new FormValidator(validationSelectors, formElement);
+        formValidator.enableValidation();
+        formValidator.resetValidation();
+    });
+}
 
 function makeSubmitbtnDisabled (popup) {
     const submitBtn = popup.querySelector(".popup__submitbtn");
@@ -35,6 +37,7 @@ export function handleCardClick(link, name, alt) {
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
+    valideForm ();
 }
 
 function openProfileInfoForm () {
