@@ -20,10 +20,15 @@ profileFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
 
-function makeSubmitbtnDisabled (popup) {
-    const submitBtn = popup.querySelector(".popup__submitbtn");
-    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
-}
+/* Закомментировала функцию makeSubmitbtnDisabled(). Она не нужна, если перед нами стоит задача блокировать кнопку сабмита не по умолчанию,
+а только для формы с невалидными полями. Для этого достаточно метода resetValidation().
+Тогда: 1) форма редактирования профиля открывается с активной кнопкой, так как ее поля валидны;
+2) форма добавления карточки открывается с заблокированной кнопкой, так как ее поля пустые. */
+
+// function makeSubmitbtnDisabled (popup) {
+//     const submitBtn = popup.querySelector(".popup__submitbtn");
+//     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
+// }
 
     function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
@@ -39,7 +44,7 @@ export function openPopup(popup) {
 
 function openProfileInfoForm () {
     openPopup(profileInfoForm);
-    makeSubmitbtnDisabled (profileInfoForm);
+    // makeSubmitbtnDisabled (profileInfoForm);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     profileFormValidator.resetValidation(); 
@@ -47,7 +52,7 @@ function openProfileInfoForm () {
 
 function openPhotoAddingForm () {
     openPopup(photoAddingForm);
-    makeSubmitbtnDisabled (photoAddingForm);
+    // makeSubmitbtnDisabled (photoAddingForm);
     placeNameInput.value = "";
     linkInput.value = "";
     addCardFormValidator.resetValidation();

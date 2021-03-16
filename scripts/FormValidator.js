@@ -25,6 +25,7 @@ class FormValidator {
         {
             this._hideInputError(formInput);
         });
+        this._toggleButtonState();
       }
 
     _setEventListeners () {
