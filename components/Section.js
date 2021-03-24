@@ -1,8 +1,6 @@
-/* import{initialCards} from "../utils/constants.js"; */
-
 export default class Section {
-    constructor ({items, renderer}, container){
-        this._initialArray = items;
+    constructor ({initialCards, renderer}, container){
+        this._initialArray = initialCards;
         this._renderer = renderer;
         this._container = container;
     }

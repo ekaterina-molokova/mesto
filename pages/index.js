@@ -4,11 +4,12 @@ import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editB
 import {FormValidator} from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
+import Popup from "../components/Popup.js"
 
 const cardList = new Section({
     initialCards,
     renderer: (item) => {
-    const card = new Card(item, ".template", handleCardClick);
+    const card = new Card(item, ".template");
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
 }
@@ -16,12 +17,18 @@ const cardList = new Section({
     elementsContainer);
 cardList.renderItems();
 
+const popupList = new Popup(".popup");
+popupList.open();
+popupList.close();
+
+
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
 
+/*
 export function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
     widePhoto.src = link;
@@ -96,3 +103,5 @@ editBtn.addEventListener("click", openProfileInfoForm);
 addBtn.addEventListener("click", openPhotoAddingForm);
 profileInfoForm.addEventListener("submit", submitProfileInfoForm);
 photoAddingForm.addEventListener("submit", addPhoto);
+
+ */
