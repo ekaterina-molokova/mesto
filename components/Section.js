@@ -1,23 +1,20 @@
-import {Card} from "./Card.js";
-import {handleCardClick} from "../pages/index.js";
+/* import{initialCards} from "../utils/constants.js"; */
 
-export class Section {
-    constructor ({data, renderer}, container){
-        this._initialArray = data;
+export default class Section {
+    constructor ({items, renderer}, container){
+        this._initialArray = items;
         this._renderer = renderer;
         this._container = container;
     }
 
-    addItem (cardElement) {
-        this._container.append(cardElement);
+    addItem (element) {
+        this._container.append(element);
     }
 
     renderItems () {
+        console.log(this._initialArray);
         this._initialArray.forEach((item) => {
-            const card = new Card(item, ".template", handleCardClick);
-            const cardElement = card.generateCard();
-            this.addItem(cardElement);
+            this._renderer(item);
         });
-        /* this._initialArray.forEach(item => this._renderer(item)); */
     }
 }

@@ -1,41 +1,26 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
     viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
-import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidator.js";
-import {Section} from "../components/Section.js";
+import Section from "../components/Section.js";
+import Card from "../components/Card.js";
 
-const cardList = new Section({data: initialCards}, elementsContainer);
+const cardList = new Section({
+    initialCards,
+    renderer: (item) => {
+    const card = new Card(item, ".template", handleCardClick);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+}
+},
+    elementsContainer);
 cardList.renderItems();
 
-/*
-function createCard (object) {
-    const card = new Card(object, ".template", handleCardClick);
-    const cardElement = card.generateCard();
-    return cardElement;
-}
-
-initialCards.forEach((item) => {
-    elementsContainer.append(createCard(item));
-});
-
-
- */
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
-
-/* Закомментировала функцию makeSubmitbtnDisabled(). Она не нужна, если перед нами стоит задача блокировать кнопку сабмита не по умолчанию,
-а только для формы с невалидными полями. Для этого достаточно метода resetValidation().
-Тогда: 1) форма редактирования профиля открывается с активной кнопкой, так как ее поля валидны;
-2) форма добавления карточки открывается с заблокированной кнопкой, так как ее поля пустые. */
-
-// function makeSubmitbtnDisabled (popup) {
-//     const submitBtn = popup.querySelector(".popup__submitbtn");
-//     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
-// }
 
 export function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
