@@ -1,9 +1,14 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
-    viewingPhotoForm, widePhoto, widePhotoFigcaption} from "./data.js";
-import {Card} from "./Card.js";
-import {FormValidator} from "./FormValidator.js";
+    viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
+import {Card} from "../components/Card.js";
+import {FormValidator} from "../components/FormValidator.js";
+import {Section} from "../components/Section.js";
 
+const cardList = new Section({data: initialCards}, elementsContainer);
+cardList.renderItems();
+
+/*
 function createCard (object) {
     const card = new Card(object, ".template", handleCardClick);
     const cardElement = card.generateCard();
@@ -14,6 +19,8 @@ initialCards.forEach((item) => {
     elementsContainer.append(createCard(item));
 });
 
+
+ */
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
 
@@ -30,7 +37,7 @@ addCardFormValidator.enableValidation();
 //     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 // }
 
-    function handleCardClick(link, name, alt) {
+export function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
     widePhoto.src = link;
     widePhotoFigcaption.textContent = name;
