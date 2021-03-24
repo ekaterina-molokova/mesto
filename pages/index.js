@@ -1,6 +1,34 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
-    nameInput, jobInput, placeNameInput, linkInput, elementsContainer} from "./data.js"
+    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
+    viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
+import {FormValidator} from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import Card from "../components/Card.js";
 
+const cardList = new Section({
+    initialCards,
+    renderer: (item) => {
+    const card = new Card(item, ".template", handleCardClick);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+}
+},
+    elementsContainer);
+cardList.renderItems();
+
+const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
+profileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
+addCardFormValidator.enableValidation();
+
+export function handleCardClick(link, name, alt) {
+    openPopup(viewingPhotoForm);
+    widePhoto.src = link;
+    widePhotoFigcaption.textContent = name;
+    widePhoto.alt = alt;
+  }
+  
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
@@ -8,21 +36,23 @@ export function openPopup(popup) {
 
 function openProfileInfoForm () {
     openPopup(profileInfoForm);
+    // makeSubmitbtnDisabled (profileInfoForm);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    profileFormValidator.resetValidation(); 
 }
 
 function openPhotoAddingForm () {
     openPopup(photoAddingForm);
+    // makeSubmitbtnDisabled (photoAddingForm);
     placeNameInput.value = "";
     linkInput.value = "";
+    addCardFormValidator.resetValidation();
 }
 
 function closePopup(popup) {
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeViaEsc);
-    const submitBtn = popup.querySelector(".popup__submitbtn");
-    submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
 }
 
 function closeViaEsc (evt) {
@@ -56,8 +86,9 @@ function submitProfileInfoForm (evt) {
 
 function addPhoto (evt) {
     preventSubmit (evt);
-    const newPhoto = getItem({name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value});
-    elementsContainer.prepend(newPhoto);
+    const newPhoto = {name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value};
+    createCard (newPhoto);
+    elementsContainer.prepend(createCard (newPhoto));
     closePopup (photoAddingForm);
 }
 
