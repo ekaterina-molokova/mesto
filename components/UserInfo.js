@@ -1,8 +1,12 @@
-import Popup from "";
-export default class UserInfo {
-    constructor (/* Принимает в конструктор объект с селекторами двух элементов:
-        элемента имени пользователя и элемента информации о себе*/) {
+import Popup from "../components/Popup.js";
 
+export default class UserInfo extends Popup {
+    constructor (popupSelector) {
+        super(popupSelector);
     }
-    getUserInfo(){}
+    setEventListeners() {
+        this._editBtn.addEventListener("click", () => {
+            this.open();
+        });
+    }
 }

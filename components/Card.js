@@ -11,27 +11,22 @@ export default class Card {
         this._likeBtn = this._element.querySelector(".elements__likebtn");
         this._deleteBtn = this._element.querySelector(".elements__deletebtn");
     }
-
     _getTemplate() {
         const cardElement = document
-        .querySelector(this._cardSelector)
-        .content
-        .querySelector(".elements__element")
-        .cloneNode(true);
-
+            .querySelector(this._cardSelector)
+            .content
+            .querySelector(".elements__element")
+            .cloneNode(true);
         return cardElement;
     }
-
     generateCard() {
         this._setEventListeners();
         this._cardTitle.textContent = this._name;
         this._cardImage.src = this._link;
         this._cardImage.alt = this._alt;
         this._cardImage.name = this._name;
-
         return this._element;
     }
-
     _setEventListeners() {
         this._likeBtn.addEventListener("click", () =>
         {
@@ -43,12 +38,11 @@ export default class Card {
             const targetItem = targetElement.closest(".elements__element");
             targetItem.remove();
         });
-        this._cardImage.addEventListener("click", () => 
+        this._cardImage.addEventListener("click", () =>
         {
             this._handleCardClick(this._link, this._name, this._alt);
         });
     }
-
     _handleLike() {
         this._likeBtn.classList.toggle("elements__likebtn_active");
     }
