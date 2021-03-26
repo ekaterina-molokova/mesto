@@ -1,7 +1,18 @@
-import Popup from "";
-export default class PopupWithImage extends Popup {
-    constructor () {
+import Popup from "../components/Popup.js";
 
+export default class PopupWithImage extends Popup {
+    constructor(popupSelector) {
+        super(popupSelector);
     }
-    open(){}
+    open(){
+        super.open();
+    }
+
+    close(){
+        super.close();
+    }
+
+    setEventListeners() {
+        super.setEventListeners();
+    }
 }

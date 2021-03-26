@@ -1,9 +1,14 @@
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
     viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
+
 import {FormValidator} from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+
 
 const cardList = new Section({
     initialCards,
@@ -16,19 +21,97 @@ const cardList = new Section({
     elementsContainer);
 cardList.renderItems();
 
+const UserInfoPopup = new UserInfo(".popup_profile-info-form", {
+    submitForm: () => {}
+});
+
+UserInfoPopup.open();
+UserInfoPopup.close();
+
+const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form", {
+    submitForm: () => {}
+});
+PhotoAddingPopup.open();
+PhotoAddingPopup.close();
+
+const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
+
+function handleCardClick(link, name, alt) {
+    ViewingPhotoPopup.open();
+    widePhoto.src = link;
+    widePhotoFigcaption.textContent = name;
+    widePhoto.alt = alt;
+}
+
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
 
-export function handleCardClick(link, name, alt) {
+/*
+
+/*
+const imageList = new Section({
+    initialCards,
+    renderer: (item) => {
+        const card = new Card({
+            item,
+            handleCardClick: (link, name, alt) => {
+                PopupWithImage.open(link, name, alt);
+            }
+        }, ".popup__photo-container");
+        imageList.addItem(card.open());
+    }
+    }, viewingPhotoForm);
+
+const cardList = new Section({
+    renderer: (data) => {
+      const card = new Card({
+        data,
+        handleCardClick: () => {
+          imagePopup.open(data);
+        }
+      }, cardsConfig.cardSelector);
+      cardList.addItem(card.getView());
+    }
+  }, cardsConfig.placesWrap
+);
+
+import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
+    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
+    viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
+import Card from "../components/Card.js";
+import {FormValidator} from "../components/FormValidator.js";
+
+function createCard (object) {
+    const card = new Card(object, ".template", handleCardClick);
+    const cardElement = card.generateCard();
+    return cardElement;
+}
+
+initialCards.forEach((item) => {
+    elementsContainer.append(createCard(item));
+});
+
+const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
+profileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
+addCardFormValidator.enableValidation();
+
+// function makeSubmitbtnDisabled (popup) {
+//     const submitBtn = popup.querySelector(".popup__submitbtn");
+//     submitBtn ? submitBtn.classList.add("popup__submitbtn_disabled") : "";
+// }
+
+function handleCardClick(link, name, alt) {
     openPopup(viewingPhotoForm);
     widePhoto.src = link;
     widePhotoFigcaption.textContent = name;
     widePhoto.alt = alt;
-  }
-  
+}
+
 export function openPopup(popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeViaEsc);
@@ -39,7 +122,7 @@ function openProfileInfoForm () {
     // makeSubmitbtnDisabled (profileInfoForm);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    profileFormValidator.resetValidation(); 
+    profileFormValidator.resetValidation();
 }
 
 function openPhotoAddingForm () {
@@ -96,3 +179,4 @@ editBtn.addEventListener("click", openProfileInfoForm);
 addBtn.addEventListener("click", openPhotoAddingForm);
 profileInfoForm.addEventListener("submit", submitProfileInfoForm);
 photoAddingForm.addEventListener("submit", addPhoto);
+*/
