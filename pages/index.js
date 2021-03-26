@@ -5,8 +5,12 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
+const UserProfilePopup = new UserInfo(".popup_profile-info-form");
+const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form");
 
 const cardList = new Section({
         initialCards,

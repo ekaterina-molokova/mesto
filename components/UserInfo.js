@@ -1,4 +1,4 @@
-/* import Popup from "../components/Popup.js";
+import Popup from "../components/Popup.js";
 
 export default class UserInfo extends Popup {
     constructor (popupSelector) {
@@ -20,5 +20,3 @@ export default class UserInfo extends Popup {
         });
     }
 }
-
- */
