@@ -5,10 +5,10 @@ import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editB
 import {FormValidator} from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+
 
 const cardList = new Section({
     initialCards,
@@ -21,14 +21,19 @@ const cardList = new Section({
     elementsContainer);
 cardList.renderItems();
 
-popups.forEach((item) => {
-   const popup = new Popup (".popup");
-   popup.open();
-   popup.close();
+const UserInfoPopup = new UserInfo(".popup_profile-info-form", {
+    submitForm: () => {}
 });
 
-const UserInfoPopup = new UserInfo(".popup_profile-info-form");
-const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form");
+UserInfoPopup.open();
+UserInfoPopup.close();
+
+const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form", {
+    submitForm: () => {}
+});
+PhotoAddingPopup.open();
+PhotoAddingPopup.close();
+
 const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 function handleCardClick(link, name, alt) {
@@ -45,6 +50,34 @@ const addCardFormValidator = new FormValidator(validationSelectors, photoAddingF
 addCardFormValidator.enableValidation();
 
 /*
+
+/*
+const imageList = new Section({
+    initialCards,
+    renderer: (item) => {
+        const card = new Card({
+            item,
+            handleCardClick: (link, name, alt) => {
+                PopupWithImage.open(link, name, alt);
+            }
+        }, ".popup__photo-container");
+        imageList.addItem(card.open());
+    }
+    }, viewingPhotoForm);
+
+const cardList = new Section({
+    renderer: (data) => {
+      const card = new Card({
+        data,
+        handleCardClick: () => {
+          imagePopup.open(data);
+        }
+      }, cardsConfig.cardSelector);
+      cardList.addItem(card.getView());
+    }
+  }, cardsConfig.placesWrap
+);
+
 import {popups, profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
     nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors,
     viewingPhotoForm, widePhoto, widePhotoFigcaption} from "../utils/constants.js";
