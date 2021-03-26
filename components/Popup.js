@@ -21,8 +21,7 @@ export default class Popup {
             const openedPopup = document.querySelector(".popup_opened");
             closePopup(openedPopup);
         }
-    }
-     */
+    } */
 
     setEventListeners () {
         this._popup.addEventListener("click", (evt) => {

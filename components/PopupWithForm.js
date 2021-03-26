@@ -1,4 +1,4 @@
-import Popup from "../components/Popup.js";
+/* import Popup from "../components/Popup.js";
 
 export default class PopupWithForm extends Popup {
     constructor (popupSelector, submitForm){
@@ -23,7 +23,6 @@ export default class PopupWithForm extends Popup {
         this.close();
         });
     }
-
     _getInputValues(){
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         this._formValues = {};
@@ -32,5 +31,5 @@ export default class PopupWithForm extends Popup {
         });
         return this._formValues;
     }
-
 }
+*/
