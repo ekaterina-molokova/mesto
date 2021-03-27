@@ -11,7 +11,31 @@ const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
-    /* const newPhoto; */
+    const newPhoto = new Card(
+        formData,
+        ".template",
+        function handleCardClick() {
+            ViewingPhotoPopup.open();
+        });
+    newPhoto.generateCard();
+    console.log(newPhoto);
+
+    /* const newPhotoArray = Array.from(formData);
+
+    const newCardList = new Section({
+            data: newPhotoArray,
+            renderer: (item) => {
+                const card = new Card(item,".template",
+                    function handleCardClick() {
+                    ViewingPhotoPopup.open(item);
+                        });
+                const cardElement = card.generateCard();
+                newCardList.addItem(cardElement);
+                }
+            },
+            elementsContainer);
+        newCardList.renderItems(); */
+
     PhotoAddingPopup.close();
 });
 
@@ -25,7 +49,7 @@ const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
 const UserProfile = new UserInfo(".popup_profile-info-form");
 
 const cardList = new Section({
-        initialCards,
+        data: initialCards,
         renderer: (item) => {
             const card = new Card(item,".template",
                 function handleCardClick() {
