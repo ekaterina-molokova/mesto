@@ -7,6 +7,9 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
+const User = new UserInfo(".popup_photo-adding-form", ".popup__name", ".popup__job");
+
+
 const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
@@ -29,8 +32,6 @@ const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
     UserProfilePopup.close();
     });
 
-const UserProfile = new UserInfo(".popup_profile-info-form");
-
 const cardList = new Section({
         data: initialCards,
         renderer: (item) => {
@@ -51,30 +52,16 @@ profileFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
 
-/*
-function openProfileInfoForm () {
-    openPopup(profileInfoForm);
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-    profileFormValidator.resetValidation();
-}
-
-function openPhotoAddingForm () {
-    openPopup(photoAddingForm);
+addBtn.addEventListener("click", () => {
+    PhotoAddingPopup.open();
+    addCardFormValidator.resetValidation();
     placeNameInput.value = "";
     linkInput.value = "";
-    addCardFormValidator.resetValidation();
-}
+});
 
-function addPhoto (evt) {
-    preventSubmit (evt);
-    const newPhoto = {name:placeNameInput.value, link: linkInput.value, alt: placeNameInput.value};
-    createCard (newPhoto);
-    elementsContainer.prepend(createCard (newPhoto));
-    closePopup (photoAddingForm);
-}
-
-profileInfoForm.addEventListener("submit", submitProfileInfoForm);
-photoAddingForm.addEventListener("submit", addPhoto);
-
- */
+editBtn.addEventListener("click", () => {
+    UserProfilePopup.open();
+    profileFormValidator.resetValidation();
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+});
