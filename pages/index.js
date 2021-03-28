@@ -32,8 +32,8 @@ const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
 
 const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    console.log(formData);
-    const User = new UserInfo(".popup_photo-adding-form", ".popup__name", ".popup__job");
+    const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
+    User.setUserInfo(formData);
     });
 
 const cardList = new Section({
@@ -64,6 +64,8 @@ addBtn.addEventListener("click", () => {
 editBtn.addEventListener("click", () => {
     UserProfilePopup.open();
     profileFormValidator.resetValidation();
+    const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
+    User.getUserInfo();
     /* nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; */
 });
