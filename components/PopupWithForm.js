@@ -13,9 +13,9 @@ export default class PopupWithForm extends Popup {
     }
     close(){
         super.close();
-        this._inputList.forEach(input => {
+        /* this._inputList.forEach(input => {
             input.value = "";
-        });
+        }); */
     }
     setEventListeners() {
         super.setEventListeners();
