@@ -1,12 +1,12 @@
 export default class Section {
-    constructor ({initialCards, renderer}, container){
-        this._initialArray = initialCards;
+    constructor ({data, renderer}, container){
+        this._initialArray = data;
         this._renderer = renderer;
         this._container = container;
     }
 
     addItem (element) {
-        this._container.append(element);
+        this._container.prepend(element);
     }
 
     renderItems () {

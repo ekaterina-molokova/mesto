@@ -2,9 +2,6 @@ export default class Popup {
     constructor (popupSelector) {
         this._popupSelector = popupSelector;
         this._popup = document.querySelector(this._popupSelector);
-        this._form = this._popup.querySelector(".popup__fields");
-        this._editBtn = document.querySelector(".profile__editbtn");
-        this._addBtn = document.querySelector(".profile__addbtn");
         this.setEventListeners();
     }
 
