@@ -1,6 +1,4 @@
-export {Card}
-
-class Card {
+export default class Card {
     constructor(data, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
@@ -16,10 +14,10 @@ class Card {
 
     _getTemplate() {
         const cardElement = document
-        .querySelector(this._cardSelector)
-        .content
-        .querySelector(".elements__element")
-        .cloneNode(true);
+            .querySelector(this._cardSelector)
+            .content
+            .querySelector(".elements__element")
+            .cloneNode(true);
 
         return cardElement;
     }
@@ -45,9 +43,9 @@ class Card {
             const targetItem = targetElement.closest(".elements__element");
             targetItem.remove();
         });
-        this._cardImage.addEventListener("click", () => 
+        this._cardImage.addEventListener("click", () =>
         {
-            this._handleCardClick(this._link, this._name, this._alt);
+            this._handleCardClick();
         });
     }
 
