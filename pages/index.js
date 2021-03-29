@@ -1,5 +1,4 @@
-import {profileInfoForm, photoAddingForm, profileName, profileJob, editBtn, addBtn,
-    nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors} from "../utils/constants.js";
+import {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors} from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -15,29 +14,22 @@ const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
         formData,
         ".template",
         function handleCardClick() {
-            ViewingPhotoPopup.open();
+            ViewingPhotoPopup.open(formData);
         });
     const newPhotoElement = newPhoto.generateCard();
     cardList.addItem(newPhotoElement);
     PhotoAddingPopup.close();
 });
 
-/* const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
-    function submitForm() {
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    UserProfilePopup.close();
-    });
- */
+const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
 
 const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
     User.setUserInfo(formData);
     });
 
 const cardList = new Section({
-        data: initialCards,
+        items: initialCards,
         renderer: (item) => {
             const card = new Card(item,".template",
                 function handleCardClick() {
@@ -47,7 +39,7 @@ const cardList = new Section({
             cardList.addItem(cardElement);
         }
     },
-    elementsContainer);
+    ".elements");
 cardList.renderItems();
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
@@ -64,8 +56,7 @@ addBtn.addEventListener("click", () => {
 editBtn.addEventListener("click", () => {
     UserProfilePopup.open();
     profileFormValidator.resetValidation();
-    const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
-    User.getUserInfo();
-    /* nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent; */
+    const {name, job} = User.getUserInfo();
+    nameInput.value = name;
+    jobInput.value = job;
 });

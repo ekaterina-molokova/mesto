@@ -1,18 +1,11 @@
 const profileInfoForm = document.querySelector(".popup_profile-info-form");
 const photoAddingForm = document.querySelector(".popup_photo-adding-form");
 
-const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector(".profile__job");
+const nameInput = document.querySelector(".popup__name");
+const jobInput = document.querySelector(".popup__job");
 
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
-
-const nameInput = document.querySelector(".popup__name");
-const jobInput = document.querySelector(".popup__job");
-const placeNameInput = document.querySelector(".popup__placename");
-const linkInput = document.querySelector(".popup__link");
-
-const elementsContainer = document.querySelector(".elements");
 
 const initialCards = [
     {
@@ -56,5 +49,4 @@ const validationSelectors = {
     errorClass: "popup__input-error-message_active"
 }
 
-export {profileInfoForm, photoAddingForm, profileName, profileJob,
-    editBtn, addBtn, nameInput, jobInput, placeNameInput, linkInput, elementsContainer, initialCards, validationSelectors}
+export {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors}

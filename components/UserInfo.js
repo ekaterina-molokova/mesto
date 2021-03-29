@@ -9,15 +9,12 @@ export default class UserInfo extends Popup {
         this._profileJobSelector = profileJobSelector;
         this._profileName = document.querySelector(this._profileNameSelector);
         this._profileJob = document.querySelector(this._profileJobSelector);
-        this._nameInput = document.querySelector(".popup__name");
-        this._jobInput = document.querySelector(".popup__job");
         this._inputSelector = ".popup__field";
         this._inputList = Array.from(this._popup.querySelectorAll(this._inputSelector));
     }
 
     getUserInfo() {
-        console.log({name: this._profileName.textContent, job: this._profileJob.textContent});
-        return {name: this._profileName.textContent, job: this._profileJob.textContent};
+        return  {name: this._profileName.textContent, job: this._profileJob.textContent};
     }
 
     setUserInfo({name, job}) {
