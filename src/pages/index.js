@@ -5,6 +5,15 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import "./index.css";
+import active from "../images/active.svg";
+import addbtn from "../images/addbtn.svg";
+import AvatarKate from "../images/AvatarKate.jpeg";
+import Bin from "../images/Bin.svg";
+import CloseIcon from "../images/CloseIcon.svg";
+import editbtn from "../images/editbtn.svg";
+import likebtn from "../images/likebtn.svg";
+import logo from "../images/logo.svg";
 
 const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 

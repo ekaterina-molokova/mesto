@@ -1,4 +1,4 @@
-import Popup from "../components/Popup.js";
+import Popup from "./Popup.js";
 
 export default class UserInfo extends Popup {
     constructor (popupSelector, profileNameSelector, profileJobSelector) {
