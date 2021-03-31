@@ -12,12 +12,4 @@ export default class PopupWithImage extends Popup {
         this._widePhotoFigcaption.textContent = item.name;
         this._widePhotoFigcaption.alt = item.alt;
     }
-
-    close(){
-        super.close();
-    }
-
-    setEventListeners() {
-        super.setEventListeners();
-    }
 }

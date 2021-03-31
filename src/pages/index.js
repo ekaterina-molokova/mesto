@@ -8,32 +8,43 @@ import UserInfo from "../components/UserInfo.js";
 import "./index.css";
 import active from "../images/active.svg";
 import addbtn from "../images/addbtn.svg";
-import Bin from "../images/Bin.svg";
-import CloseIcon from "../images/CloseIcon.svg";
+import bin from "../images/Bin.svg";
+import closeIcon from "../images/CloseIcon.svg";
 import editbtn from "../images/editbtn.svg";
 import likebtn from "../images/likebtn.svg";
 
+/*
+function createCard (object) {
+    const card = new Card(
+    object,
+    ".template",
+    function handleCardClick() {
+    viewingPhotoPopup.open(object);
+    });
+    const cardElement = card.generateCard();
+    return cardElement;
+} */
 
-const ViewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
+const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
-const PhotoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
+const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
     const newPhoto = new Card(
         formData,
         ".template",
         function handleCardClick() {
-            ViewingPhotoPopup.open(formData);
+            viewingPhotoPopup.open(formData);
         });
     const newPhotoElement = newPhoto.generateCard();
     cardList.addItem(newPhotoElement);
-    PhotoAddingPopup.close();
+    photoAddingPopup.close();
 });
 
-const User = new UserInfo(".popup_photo-adding-form", ".profile__name", ".profile__job");
+const user = new UserInfo(".profile__name", ".profile__job");
 
-const UserProfilePopup = new PopupWithForm(".popup_profile-info-form",
+const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    User.setUserInfo(formData);
+    user.setUserInfo(formData);
     });
 
 const cardList = new Section({
@@ -41,7 +52,7 @@ const cardList = new Section({
         renderer: (item) => {
             const card = new Card(item,".template",
                 function handleCardClick() {
-                    ViewingPhotoPopup.open(item);
+                    viewingPhotoPopup.open(item);
                 });
             const cardElement = card.generateCard();
             cardList.addItem(cardElement);
@@ -57,14 +68,14 @@ const addCardFormValidator = new FormValidator(validationSelectors, photoAddingF
 addCardFormValidator.enableValidation();
 
 addBtn.addEventListener("click", () => {
-    PhotoAddingPopup.open();
+    photoAddingPopup.open();
     addCardFormValidator.resetValidation();
 });
 
 editBtn.addEventListener("click", () => {
-    UserProfilePopup.open();
+    userProfilePopup.open();
     profileFormValidator.resetValidation();
-    const {name, job} = User.getUserInfo();
+    const {name, job} = user.getUserInfo();
     nameInput.value = name;
     jobInput.value = job;
 });

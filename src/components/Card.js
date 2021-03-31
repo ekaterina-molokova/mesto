@@ -37,11 +37,9 @@ export default class Card {
         {
             this._handleLike();
         });
-        this._deleteBtn.addEventListener("click", (event) =>
+        this._deleteBtn.addEventListener("click", () =>
         {
-            const targetElement = event.target;
-            const targetItem = targetElement.closest(".elements__element");
-            targetItem.remove();
+            this._element.remove();
         });
         this._cardImage.addEventListener("click", () =>
         {
