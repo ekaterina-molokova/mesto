@@ -13,7 +13,6 @@ import closeIcon from "../images/CloseIcon.svg";
 import editbtn from "../images/editbtn.svg";
 import likebtn from "../images/likebtn.svg";
 
-/*
 function createCard (object) {
     const card = new Card(
     object,
@@ -23,22 +22,15 @@ function createCard (object) {
     });
     const cardElement = card.generateCard();
     return cardElement;
-} */
+}
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
-    const newPhoto = new Card(
-        formData,
-        ".template",
-        function handleCardClick() {
-            viewingPhotoPopup.open(formData);
-        });
-    const newPhotoElement = newPhoto.generateCard();
-    cardList.addItem(newPhotoElement);
-    photoAddingPopup.close();
-});
+        cardList.addItem(createCard(formData));
+        photoAddingPopup.close();
+    });
 
 const user = new UserInfo(".profile__name", ".profile__job");
 
@@ -50,12 +42,7 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
 const cardList = new Section({
         items: initialCards,
         renderer: (item) => {
-            const card = new Card(item,".template",
-                function handleCardClick() {
-                    viewingPhotoPopup.open(item);
-                });
-            const cardElement = card.generateCard();
-            cardList.addItem(cardElement);
+            cardList.addItem(createCard(item));
         }
     },
     ".elements");
