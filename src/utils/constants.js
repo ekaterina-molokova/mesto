@@ -7,6 +7,8 @@ const jobInput = document.querySelector(".popup__job");
 const editBtn = document.querySelector(".profile__editbtn");
 const addBtn = document.querySelector(".profile__addbtn");
 
+const escape = "Escape";
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -49,4 +51,4 @@ const validationSelectors = {
     errorClass: "popup__input-error-message_active"
 }
 
-export {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors}
+export {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors, escape}

@@ -1,14 +1,16 @@
+import {escape} from "../utils/constants.js";
 export default class Popup {
     constructor (popupSelector) {
         this._popupSelector = popupSelector;
         this._popup = document.querySelector(this._popupSelector);
         this.setEventListeners();
+        this._closeViaEsc = this._closeViaEsc.bind(this);
     }
 
     open () {
         this._popup.classList.add("popup_opened");
         document.addEventListener("keydown", (evt) => {
-           this._closeViaEsc(evt);
+            this._closeViaEsc(evt);
         });
     }
 
@@ -20,7 +22,7 @@ export default class Popup {
     }
 
     _closeViaEsc (evt) {
-        if (evt.key === "Escape") {
+        if (evt.key === escape) {
             this.close();
         }
     }
