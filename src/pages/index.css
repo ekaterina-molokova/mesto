@@ -19,6 +19,8 @@
 @import url("../blocks/elements/__figcaption/elements__figcaption.css");
 @import url("../blocks/elements/__likebtn/elements__likebtn.css");
 @import url("../blocks/elements/__likebtn/_active/elements__likebtn_active.css");
+@import url("../blocks/elements/__counter/elements__counter.css");
+@import url("../blocks/elements/__likebtngroep/elements__likebtngroep.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/copyright/copyright.css");
 @import url("../blocks/popup/popup.css");
