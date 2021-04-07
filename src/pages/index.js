@@ -25,7 +25,14 @@ function createCard (object) {
     return cardElement;
 }
 
-const confirmPopup = new Popup(".popup_confirm");
+const confirmPopup = new PopupWithForm(".popup_confirm",
+    function submitForm(formData) {
+        confirmPopup.close();
+    });
+const updateAvatarPopup = new PopupWithForm(".popup_avatar",
+    function submitForm(formData) {
+        updateAvatarPopup.close();
+    });
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 

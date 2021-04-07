@@ -50,3 +50,7 @@
 @import url("../blocks/popup/_confirm/popup_confirm.css");
 @import url("../blocks/popup/__confirmation/popup__confirmation.css");
 @import url("../blocks/profile/__editbtn/_avatar/profile__editbtn_avatar.css");
+@import url("../blocks/popup/_avatar/popup_avatar.css");
+@import url("../blocks/popup/__avatar-update/popup__avatar-update.css");
+@import url("../blocks/popup/__avatar-link/popup__avatar-link.css");
+
