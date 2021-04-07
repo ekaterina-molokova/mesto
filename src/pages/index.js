@@ -12,6 +12,7 @@ import bin from "../images/Bin.svg";
 import closeIcon from "../images/CloseIcon.svg";
 import editbtn from "../images/editbtn.svg";
 import likebtn from "../images/likebtn.svg";
+import Popup from "../components/Popup";
 
 function createCard (object) {
     const card = new Card(
@@ -23,6 +24,8 @@ function createCard (object) {
     const cardElement = card.generateCard();
     return cardElement;
 }
+
+const confirmPopup = new Popup(".popup_confirm");
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
