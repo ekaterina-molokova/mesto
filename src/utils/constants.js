@@ -3,11 +3,16 @@ const photoAddingForm = document.querySelector(".popup_photo-adding-form");
 
 const nameInput = document.querySelector(".popup__name");
 const jobInput = document.querySelector(".popup__job");
+const avatarInput = document.querySelector(".popup__avatar-link");
 
-const editBtn = document.querySelector(".profile__editbtn");
+const editInfoBtn = document.querySelector(".profile__editbtn_info");
+const editAvatarBtn = document.querySelector(".profile__editbtn_avatar");
+
 const addBtn = document.querySelector(".profile__addbtn");
 
 const escape = "Escape";
+
+const avatar = document.querySelector(".profile__avatar");
 
 const initialCards = [
     {
@@ -51,4 +56,4 @@ const validationSelectors = {
     errorClass: "popup__input-error-message_active"
 }
 
-export {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors, escape}
+export {profileInfoForm, photoAddingForm, nameInput, jobInput, avatarInput, editInfoBtn, editAvatarBtn, addBtn, initialCards, validationSelectors, escape, avatar}

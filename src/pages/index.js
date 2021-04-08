@@ -1,4 +1,16 @@
-import {profileInfoForm, photoAddingForm, nameInput, jobInput, editBtn, addBtn, initialCards, validationSelectors} from "../utils/constants.js";
+import {
+    profileInfoForm,
+    photoAddingForm,
+    nameInput,
+    jobInput,
+    avatarInput,
+    editAvatarBtn,
+    editInfoBtn,
+    addBtn,
+    initialCards,
+    validationSelectors,
+    avatar
+} from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -29,10 +41,6 @@ const confirmPopup = new PopupWithForm(".popup_confirm",
     function submitForm(formData) {
         confirmPopup.close();
     });
-const updateAvatarPopup = new PopupWithForm(".popup_avatar",
-    function submitForm(formData) {
-        updateAvatarPopup.close();
-    });
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
@@ -47,6 +55,12 @@ const user = new UserInfo(".profile__name", ".profile__job");
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
     user.setUserInfo(formData);
+    });
+
+const updateAvatarPopup = new PopupWithForm(".popup_avatar",
+    function submitForm(formData) {
+    console.log(formData);
+    avatar.src = avatarInput.value;
     });
 
 const cardList = new Section({
@@ -69,10 +83,26 @@ addBtn.addEventListener("click", () => {
     addCardFormValidator.resetValidation();
 });
 
-editBtn.addEventListener("click", () => {
-    userProfilePopup.open();
-    profileFormValidator.resetValidation();
-    const {name, job} = user.getUserInfo();
-    nameInput.value = name;
-    jobInput.value = job;
+editInfoBtn.addEventListener("click", () => {
+        userProfilePopup.open();
+        profileFormValidator.resetValidation();
+        const {name, job} = user.getUserInfo();
+        nameInput.value = name;
+        jobInput.value = job;
+});
+
+avatar.addEventListener("mouseover", () => {
+    editAvatarBtn.setAttribute("style", "display: flex");
+    avatar.setAttribute("style", "opacity: 0.2");
+    avatar.setAttribute("style", "background-color: #C4C4C4");
+});
+
+avatar.addEventListener("mouseout", () => {
+    editAvatarBtn.setAttribute("style", "display: none");
+    avatar.setAttribute("style", "opacity: none");
+    avatar.setAttribute("style", "background-color: none");
+});
+
+avatar.addEventListener("click", () => {
+    updateAvatarPopup.open();
 });
