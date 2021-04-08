@@ -1,4 +1,5 @@
 import {confirmPopup} from "../pages/index.js";
+import PopupWithForm from "./PopupWithForm";
 
 export default class Card {
     constructor(data, cardSelector, handleCardClick) {
@@ -39,8 +40,16 @@ export default class Card {
         {
             this._handleLike();
         });
-        this._deleteBtn.addEventListener("click", (evt) =>
+        this._deleteBtn.addEventListener("click", (event) =>
         {
+            const targetElement = event.target;
+            console.log(targetElement);
+            const targetItem = targetElement.closest(".elements__element");
+            console.log(targetItem);
+            const confirmPopup = new PopupWithForm(".popup_confirm", targetItem,
+                function submitForm() {
+                targetItem.remove();
+                });
             confirmPopup.open();
         });
         this._cardImage.addEventListener("click", () =>

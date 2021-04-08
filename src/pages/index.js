@@ -37,11 +37,6 @@ function createCard (object) {
     return cardElement;
 }
 
-export const confirmPopup = new PopupWithForm(".popup_confirm",
-    function submitForm() {
-
-    });
-
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
