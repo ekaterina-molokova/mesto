@@ -1,3 +1,5 @@
+import {confirmPopup} from "../pages/index.js";
+
 export default class Card {
     constructor(data, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
@@ -37,9 +39,9 @@ export default class Card {
         {
             this._handleLike();
         });
-        this._deleteBtn.addEventListener("click", () =>
+        this._deleteBtn.addEventListener("click", (evt) =>
         {
-            this._element.remove();
+            confirmPopup.open();
         });
         this._cardImage.addEventListener("click", () =>
         {

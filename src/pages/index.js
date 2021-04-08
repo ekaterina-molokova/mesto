@@ -37,9 +37,9 @@ function createCard (object) {
     return cardElement;
 }
 
-const confirmPopup = new PopupWithForm(".popup_confirm",
-    function submitForm(formData) {
-        confirmPopup.close();
+export const confirmPopup = new PopupWithForm(".popup_confirm",
+    function submitForm() {
+
     });
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
@@ -58,8 +58,7 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
-    function submitForm(formData) {
-    console.log(formData);
+    function submitForm() {
     avatar.src = avatarInput.value;
     });
 
@@ -100,9 +99,18 @@ avatar.addEventListener("mouseover", () => {
 avatar.addEventListener("mouseout", () => {
     editAvatarBtn.setAttribute("style", "display: none");
     avatar.setAttribute("style", "opacity: none");
-    avatar.setAttribute("style", "background-color: none");
+    avatar.setAttribute("style", "background-color: transparent");
 });
 
 avatar.addEventListener("click", () => {
     updateAvatarPopup.open();
 });
+
+/*
+const deleteBtns = document.querySelectorAll(".elements__deletebtn");
+
+deleteBtns.forEach((button) => {
+   button.addEventListener("click", () => {
+       confirmPopup.open();
+   });
+}); */

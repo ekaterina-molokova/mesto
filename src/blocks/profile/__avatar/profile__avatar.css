@@ -4,5 +4,8 @@
     padding: 0;
     box-sizing: border-box;
     border-radius: 50%;
-    max-width: 120px;
+    width: 120px;
+    height: 120px;
+    background-color: transparent;
+    opacity: 1;
 }
