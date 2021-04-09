@@ -1,13 +1,13 @@
-import {confirmPopup} from "../pages/index.js";
-import PopupWithForm from "./PopupWithForm";
-
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, cardSelector, handleCardClick, handleDelete) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._handleDelete = handleDelete;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
+        this._id = data.id;
+        this._user = data.user;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");
@@ -25,6 +25,10 @@ export default class Card {
         return cardElement;
     }
 
+    getId() {
+        return this._id;
+    }
+
     generateCard() {
         this._setEventListeners();
         this._cardTitle.textContent = this._name;
@@ -35,22 +39,18 @@ export default class Card {
         return this._element;
     }
 
+    deleteCard() {
+        this._element.remove();
+    }
+
     _setEventListeners() {
         this._likeBtn.addEventListener("click", () =>
         {
             this._handleLike();
         });
-        this._deleteBtn.addEventListener("click", (event) =>
+        this._deleteBtn.addEventListener("click", () =>
         {
-            const targetElement = event.target;
-            console.log(targetElement);
-            const targetItem = targetElement.closest(".elements__element");
-            console.log(targetItem);
-            const confirmPopup = new PopupWithForm(".popup_confirm", targetItem,
-                function submitForm() {
-                targetItem.remove();
-                });
-            confirmPopup.open();
+            this._handleDelete(this);
         });
         this._cardImage.addEventListener("click", () =>
         {

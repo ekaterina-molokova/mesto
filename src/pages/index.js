@@ -17,6 +17,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import "./index.css";
 import active from "../images/active.svg";
 import addbtn from "../images/addbtn.svg";
@@ -25,6 +26,18 @@ import closeIcon from "../images/CloseIcon.svg";
 import editbtn from "../images/editbtn.svg";
 import likebtn from "../images/likebtn.svg";
 import Popup from "../components/Popup";
+
+const api = new Api({
+    address: "https://mesto.nomoreparties.co",
+    token: "71bb88c3-1b7f-415b-b8bb-324cea5ee034",
+    groupID: "cohort-22"
+})
+
+api.getInitialCards()
+    .then(cards => {
+        cardList.renderItems(cards);
+    })
+    .catch(error => alert(error));
 
 function createCard (object) {
     const card = new Card(
@@ -36,6 +49,14 @@ function createCard (object) {
     const cardElement = card.generateCard();
     return cardElement;
 }
+
+const cardList = new Section({
+        items: initialCards,
+        renderer: (item) => {
+            cardList.addItem(createCard(item));
+        }
+    },
+    ".elements");
 
 const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
@@ -56,15 +77,6 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm() {
     avatar.src = avatarInput.value;
     });
-
-const cardList = new Section({
-        items: initialCards,
-        renderer: (item) => {
-            cardList.addItem(createCard(item));
-        }
-    },
-    ".elements");
-cardList.renderItems();
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
@@ -108,4 +120,12 @@ deleteBtns.forEach((button) => {
    button.addEventListener("click", () => {
        confirmPopup.open();
    });
+
+
+   const confirmPopup = new PopupWithForm(".popup_confirm",
+                function submitForm() {
+                targetItem.remove();
+                });
+            confirmPopup.open();
+
 }); */
