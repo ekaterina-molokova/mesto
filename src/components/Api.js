@@ -5,6 +5,25 @@ export default class Api {
         this._groupID = groupID;
     }
 
+    editProfile(formData) {
+        return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._token,
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                link: formData.link})
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            });
+    }
+
     getOwnerInfo() {
         return fetch(`${this._address}/v1/${this._groupID}/users/me`,{
             headers: {

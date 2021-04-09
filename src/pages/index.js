@@ -94,7 +94,11 @@ const user = new UserInfo(".profile__name", ".profile__job");
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    user.setUserInfo(formData);
+    api.editProfile(formData)
+            .then(result => {
+                user.setUserInfo(formData);
+            })
+        .catch(error => alert(error));
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
