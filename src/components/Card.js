@@ -1,12 +1,12 @@
 export default class Card {
-    constructor(data, cardSelector, handleCardClick, handleDelete) {
+    constructor({data, handleCardClick, handleDelete}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
-        this._id = data.id;
+        this._id = data._id;
         this._user = data.user;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");

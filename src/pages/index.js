@@ -39,20 +39,23 @@ api.getInitialCards()
     })
     .catch(error => alert(error));
 
-function createCard (object) {
-    const card = new Card(
-    object,
-    ".template",
-        function handleCardClick() {
-        viewingPhotoPopup.open(object);
-        },
-        function handleDelete() {
-        api.deleteCard(card.getId())
-            .then(() => {
-                card.deleteCard();
-            })
-            .catch(error => alert(error))
-        });
+function createCard (data) {
+    const card = new Card (
+        {
+            data,
+            handleCardClick: () => {
+                viewingPhotoPopup.open(data);
+            },
+            handleDelete: () => {
+                api.deleteCard(card.getId())
+                    .then(() => {
+                        card.deleteCard();
+                    })
+                    .catch(() => {
+                        console.log(`Удалить карточку не получается, но я же вижу ее id! ${card._id}`)
+                    });
+            }
+        }, ".template");
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -71,7 +74,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
     api.addNewCard(formData)
         .then(result => {
-            cardList.addItem(createCard({...formData, _id: result.id}));
+            cardList.addItem(createCard({...formData, _id: result._id}));
         })
         .catch(error => alert(error));
     photoAddingPopup.close();
@@ -123,14 +126,3 @@ avatar.addEventListener("click", () => {
 editAvatarBtn.addEventListener("click", () => {
     updateAvatarPopup.open();
 });
-
-/*
-
-
-   const confirmPopup = new PopupWithForm(".popup_confirm",
-                function submitForm() {
-                targetItem.remove();
-                });
-            confirmPopup.open();
-
-}); */

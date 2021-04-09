@@ -38,8 +38,8 @@ export default class Api {
             })
     }
 
-    deleteCard(id) {
-        return fetch(`${this._address}/v1/${this._groupID}/cards/${id}`, {
+    deleteCard(_id) {
+        return fetch(`${this._address}/v1/${this._groupID}/cards/${_id}`, {
             method: "DElETE",
             headers: {
                 authorization: this._token
@@ -47,7 +47,7 @@ export default class Api {
         })
             .then(response => {
                 if(response.ok) {
-                    Promise.resolve("success");
+                    Promise.resolve("done");
                 }
                 return Promise.reject(`Что-то пошло не так: ${response.status}`);
             })
