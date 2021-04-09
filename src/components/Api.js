@@ -6,22 +6,17 @@ export default class Api {
     }
 
     editProfile(formData) {
-        return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
-            method: "PATCH",
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+            method: 'PATCH',
             headers: {
-                authorization: this._token,
-                "Content-type": "application/json"
+                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 name: formData.name,
-                link: formData.link})
-        })
-            .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
-            });
+                about: formData.job
+            })
+        });
     }
 
     getOwnerInfo() {
@@ -62,7 +57,8 @@ export default class Api {
                 },
                 body: JSON.stringify({
                     name: formData.name,
-                    link: formData.link})
+                    link: formData.link
+                })
             })
             .then(response => {
                 if(response.ok) {

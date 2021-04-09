@@ -38,7 +38,7 @@ api.getOwnerInfo()
         console.log(result);
         document.querySelector(".profile__name").textContent = result.name;
         document.querySelector(".profile__job").textContent = result.about;
-        document.querySelector(".profile__avatar").link = result.link;
+        document.querySelector(".profile__avatar").src = result.avatar;
         const isOwner = result._id;
     })
     .catch(error => alert(error));
