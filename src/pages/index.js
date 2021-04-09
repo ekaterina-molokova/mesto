@@ -43,12 +43,6 @@ api.getOwnerInfo()
     })
     .catch(error => alert(error));
 
-api.getInitialCards()
-    .then(cards => {
-        cardList.renderItems(cards);
-    })
-    .catch(error => alert(error));
-
 function createCard (data) {
     const card = new Card (
         {
@@ -57,21 +51,25 @@ function createCard (data) {
                 viewingPhotoPopup.open(data);
             },
             handleDelete: () => {
-                api.deleteCard(card.getId())
+                const id = card.getId();
+                api.deleteCard(id)
                     .then(() => {
                         card.deleteCard();
                     })
-                    .catch(() => {
-                        console.log(`Удалить карточку не получается, но я же вижу ее id! ${card._id}`)
-                    });
+                    .catch(error => alert(error));
             }
         }, ".template");
     const cardElement = card.generateCard();
     return cardElement;
 }
 
+api.getInitialCards()
+    .then(cards => {
+        cardList.renderItems(cards);
+    })
+    .catch(error => alert(error));
+
 const cardList = new Section({
-        items: initialCards,
         renderer: (item) => {
             cardList.addItem(createCard(item));
         }

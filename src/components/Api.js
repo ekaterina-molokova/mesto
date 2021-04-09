@@ -77,7 +77,7 @@ export default class Api {
         })
             .then(response => {
                 if(response.ok) {
-                    Promise.resolve("done");
+                    return Promise.resolve("done");
                 }
                 return Promise.reject(`Что-то пошло не так: ${response.status}`);
             })
