@@ -43,9 +43,16 @@ function createCard (object) {
     const card = new Card(
     object,
     ".template",
-    function handleCardClick() {
-    viewingPhotoPopup.open(object);
-    });
+        function handleCardClick() {
+        viewingPhotoPopup.open(object);
+        },
+        function handleDelete() {
+        api.deleteCard(card.getId())
+            .then(() => {
+                card.deleteCard();
+            })
+            .catch(error => alert(error))
+        });
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -103,17 +110,17 @@ editInfoBtn.addEventListener("click", () => {
 
 avatar.addEventListener("mouseover", () => {
     editAvatarBtn.setAttribute("style", "display: flex");
-    avatar.setAttribute("style", "opacity: 0.2");
-    avatar.setAttribute("style", "background-color: #C4C4C4");
 });
 
 avatar.addEventListener("mouseout", () => {
     editAvatarBtn.setAttribute("style", "display: none");
-    avatar.setAttribute("style", "opacity: none");
-    avatar.setAttribute("style", "background-color: transparent");
 });
 
 avatar.addEventListener("click", () => {
+    updateAvatarPopup.open();
+});
+
+editAvatarBtn.addEventListener("click", () => {
     updateAvatarPopup.open();
 });
 

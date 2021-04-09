@@ -37,4 +37,19 @@ export default class Api {
                 return Promise.reject(`Что-то пошло не так: ${response.status}`);
             })
     }
+
+    deleteCard(id) {
+        return fetch(`${this._address}/v1/${this._groupID}/cards/${id}`, {
+            method: "DElETE",
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(response => {
+                if(response.ok) {
+                    Promise.resolve("success");
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            })
+    }
 }
