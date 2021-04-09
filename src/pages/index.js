@@ -62,8 +62,12 @@ const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
-        cardList.addItem(createCard(formData));
-        photoAddingPopup.close();
+    api.addNewCard(formData)
+        .then(result => {
+            cardList.addItem(createCard({...formData, _id: result.id}));
+        })
+        .catch(error => alert(error));
+    photoAddingPopup.close();
     });
 
 const user = new UserInfo(".profile__name", ".profile__job");
@@ -114,12 +118,6 @@ avatar.addEventListener("click", () => {
 });
 
 /*
-const deleteBtns = document.querySelectorAll(".elements__deletebtn");
-
-deleteBtns.forEach((button) => {
-   button.addEventListener("click", () => {
-       confirmPopup.open();
-   });
 
 
    const confirmPopup = new PopupWithForm(".popup_confirm",
