@@ -5,12 +5,27 @@ export default class Api {
         this._groupID = groupID;
     }
 
+    getOwnerInfo() {
+        return fetch(`${this._address}/v1/${this._groupID}/users/me`,{
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            });
+    }
+
     getInitialCards() {
         return fetch(`${this._address}/v1/${this._groupID}/cards`, {
             headers: {
                 authorization: this._token
             }
-        }).then(response => {
+        })
+            .then(response => {
             if(response.ok) {
                 return response.json();
             }

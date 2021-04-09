@@ -33,6 +33,16 @@ const api = new Api({
     groupID: "cohort-22"
 })
 
+api.getOwnerInfo()
+    .then((result) => {
+        console.log(result);
+        document.querySelector(".profile__name").textContent = result.name;
+        document.querySelector(".profile__job").textContent = result.about;
+        document.querySelector(".profile__avatar").link = result.link;
+        const isOwner = result._id;
+    })
+    .catch(error => alert(error));
+
 api.getInitialCards()
     .then(cards => {
         cardList.renderItems(cards);
