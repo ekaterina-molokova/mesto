@@ -85,7 +85,7 @@ export default class Api {
         return fetch(`${this._address}/v1/${this._groupID}/cards/${_id}`, {
             method: "DElETE",
             headers: {
-                authorization: this._token
+                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034'
             }
         })
             .then(response => {
