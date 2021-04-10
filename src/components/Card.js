@@ -47,6 +47,11 @@ export default class Card {
         this._likeBtn.addEventListener("click", () =>
         {
             this._handleLike();
+            if (this._likeBtn.classList.contains("elements__likebtn_active")) {
+                document.querySelector(".elements__counter").textContent = "1";
+            } else {
+                document.querySelector(".elements__counter").textContent = "";
+            }
         });
         this._deleteBtn.addEventListener("click", () =>
         {
