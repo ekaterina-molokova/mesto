@@ -65,20 +65,20 @@ function createCard (data) {
                     api.deleteLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
+                            const likeCounter = card.getLikeCounter();
+                            likeCounter.textContent = data.likes.length;
                         })
                         .catch(error => alert(error));
                 } else {
                     api.putLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.add("elements__likebtn_active");
+                            const likeCounter = card.getLikeCounter();
+                            likeCounter.textContent = data.likes.length;
                         })
                         .catch(error => alert(error));
                 }
             },
-            handleLikeCounter: () => {
-                const likeCounter = card.getLikeCounter();
-                likeCounter.textContent = data.likes.length;
-            }
         }, ".template");
     const cardElement = card.generateCard();
     return cardElement;

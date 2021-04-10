@@ -1,10 +1,9 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete, handleLike, handleLikeCounter}, cardSelector) {
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
         this._handleLike = handleLike;
-        this._handleLikeCounter = handleLikeCounter;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
@@ -54,7 +53,6 @@ export default class Card {
         this._likeBtn.addEventListener("click", () =>
         {
             this._handleLike(this);
-            this._handleLikeCounter(this);
         });
         this._deleteBtn.addEventListener("click", () =>
         {
