@@ -40,7 +40,7 @@ api.getOwnerInfo()
         const isOwner = result._id;
     })
     .catch(error => alert(error));
-
+/*
 function createCard (data) {
     const card = new Card (
         {
@@ -59,6 +59,45 @@ function createCard (data) {
                     confirmationPopup.close();
                 });
                 confirmationPopup.open();
+            }
+        }, ".template");
+    const cardElement = card.generateCard();
+    return cardElement;
+} */
+
+function createCard (data) {
+    const card = new Card (
+        {
+            data,
+            handleCardClick: () => {
+                viewingPhotoPopup.open(data);
+            },
+            handleDelete: () => {
+                const confirmationPopup = new PopupWithForm(".popup_confirm",
+                    function submitForm ({_id}) {
+                        api.deleteCard(card.getId())
+                            .then(() => {
+                                card.deleteCard();
+                            })
+                            .catch(error => alert(error));
+                        confirmationPopup.close();
+                    });
+                confirmationPopup.open();
+            },
+            handleLike: ({_id}) => {
+                if(card._likeBtn.classList.contains("elements__likebtn_active")) {
+                    api.deleteLike(card.getId())
+                        .then(() => {
+                            card._likeBtn.classList.remove("elements__likebtn_active");
+                        })
+                        .catch(error => alert(error));
+                } else {
+                    api.putLike(card.getId())
+                        .then(() => {
+                            card._likeBtn.classList.add("elements__likebtn_active");
+                        })
+                        .catch(error => alert(error));
+                }
             }
         }, ".template");
     const cardElement = card.generateCard();

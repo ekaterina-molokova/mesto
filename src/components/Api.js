@@ -5,6 +5,36 @@ export default class Api {
         this._groupID = groupID;
     }
 
+    deleteLike(_id) {
+        return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${_id}`, {
+            method: "DElETE",
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(response => {
+                if(response.ok) {
+                    return Promise.resolve("done");
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            })
+    }
+
+    putLike(_id) {
+        return fetch (`${this._address}/v1/${this._groupID}/cards/likes/${_id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            });
+    }
+
     editAvatar(formData) {
         return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
             method: 'PATCH',

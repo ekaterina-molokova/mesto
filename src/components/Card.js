@@ -1,8 +1,9 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete}, cardSelector) {
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
+        this._handleLike = handleLike;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
@@ -46,12 +47,13 @@ export default class Card {
     _setEventListeners() {
         this._likeBtn.addEventListener("click", () =>
         {
-            this._handleLike();
+            this._handleLike(this);
+            /* this._handleLike();
             if (this._likeBtn.classList.contains("elements__likebtn_active")) {
                 document.querySelector(".elements__counter").textContent = "1";
             } else {
                 document.querySelector(".elements__counter").textContent = "";
-            }
+            } */
         });
         this._deleteBtn.addEventListener("click", () =>
         {
@@ -61,9 +63,5 @@ export default class Card {
         {
             this._handleCardClick();
         });
-    }
-
-    _handleLike() {
-        this._likeBtn.classList.toggle("elements__likebtn_active");
     }
 }
