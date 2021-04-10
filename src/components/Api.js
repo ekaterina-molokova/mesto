@@ -6,23 +6,23 @@ export default class Api {
     }
 
     editAvatar(formData) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me/avatar', {
+        return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
-                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034',
+                authorization: this._token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                avatar: formData.link
+                avatar:document.querySelector(".popup__avatar-link").value
             })
         });
     }
 
     editProfile(formData) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+        return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
             method: 'PATCH',
             headers: {
-                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034',
+                authorization: this._token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -85,7 +85,7 @@ export default class Api {
         return fetch(`${this._address}/v1/${this._groupID}/cards/${_id}`, {
             method: "DElETE",
             headers: {
-                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034'
+                authorization: this._token
             }
         })
             .then(response => {

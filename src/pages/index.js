@@ -30,7 +30,7 @@ const api = new Api({
     address: "https://mesto.nomoreparties.co",
     token: "71bb88c3-1b7f-415b-b8bb-324cea5ee034",
     groupID: "cohort-22"
-})
+});
 
 api.getOwnerInfo()
     .then((result) => {
@@ -40,27 +40,6 @@ api.getOwnerInfo()
         const isOwner = result._id;
     })
     .catch(error => alert(error));
-
-/*
-function createCard (data) {
-    const card = new Card (
-        {
-            data,
-            handleCardClick: () => {
-                viewingPhotoPopup.open(data);
-            },
-            handleDelete: () => {
-                const id = card.getId();
-                api.deleteCard(id)
-                    .then(() => {
-                        card.deleteCard();
-                    })
-                    .catch(error => alert(error));
-            }
-        }, ".template");
-    const cardElement = card.generateCard();
-    return cardElement;
-} */
 
 function createCard (data) {
     const card = new Card (
@@ -126,7 +105,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
     api.editAvatar(formData)
         .then(result => {
-            avatar.src = avatarInput.value;
+            avatar.src = result.url;
         })
         .catch(error => alert(error));
     });
