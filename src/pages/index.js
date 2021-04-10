@@ -101,11 +101,15 @@ const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
+    photoAddingPopup.renderLoading(true);
     api.addNewCard(formData)
         .then(result => {
             cardList.addItem(createCard({...formData, _id: result._id}));
         })
-        .catch(error => alert(error));
+        .catch(error => alert(error))
+        .finally(() => {
+            photoAddingPopup.renderLoading(false);
+        });
     photoAddingPopup.close();
     });
 
@@ -113,20 +117,28 @@ const user = new UserInfo(".profile__name", ".profile__job");
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
+    userProfilePopup.renderLoading(true);
     api.editProfile(formData)
             .then(result => {
                 user.setUserInfo(formData);
             })
-        .catch(error => alert(error));
+        .catch(error => alert(error))
+        .finally(() => {
+            userProfilePopup.renderLoading(false);
+        });
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
+    updateAvatarPopup.renderLoading(true);
     api.editAvatar(formData)
         .then(result => {
             avatar.setAttribute("src", `${avatar.src}`);
         })
-        .catch(error => alert(error));
+        .catch(error => alert(error))
+        .finally(() => {
+            updateAvatarPopup.renderLoading(false);
+        });
     });
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
@@ -158,8 +170,10 @@ avatar.addEventListener("mouseout", () => {
 
 avatar.addEventListener("click", () => {
     updateAvatarPopup.open();
+    updateAvatarPopup.renderLoading(false);
 });
 
 editAvatarBtn.addEventListener("click", () => {
     updateAvatarPopup.open();
+    updateAvatarPopup.renderLoading(false);
 });
