@@ -105,7 +105,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
     api.editAvatar(formData)
         .then(result => {
-            avatar.src = result.url;
+            avatar.setAttribute("src", `${avatar.src}`);
         })
         .catch(error => alert(error));
     });
