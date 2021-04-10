@@ -40,30 +40,6 @@ api.getOwnerInfo()
         const isOwner = result._id;
     })
     .catch(error => alert(error));
-/*
-function createCard (data) {
-    const card = new Card (
-        {
-            data,
-            handleCardClick: () => {
-                viewingPhotoPopup.open(data);
-            },
-            handleDelete: () => {
-                const confirmationPopup = new PopupWithForm(".popup_confirm",
-                    function submitForm ({_id}) {
-                    api.deleteCard(card.getId())
-                        .then(() => {
-                            card.deleteCard();
-                        })
-                        .catch(error => alert(error));
-                    confirmationPopup.close();
-                });
-                confirmationPopup.open();
-            }
-        }, ".template");
-    const cardElement = card.generateCard();
-    return cardElement;
-} */
 
 function createCard (data) {
     const card = new Card (
@@ -98,6 +74,10 @@ function createCard (data) {
                         })
                         .catch(error => alert(error));
                 }
+            },
+            handleLikeCounter: () => {
+                const likeCounter = card.getLikeCounter();
+                likeCounter.textContent = data.likes.length;
             }
         }, ".template");
     const cardElement = card.generateCard();
