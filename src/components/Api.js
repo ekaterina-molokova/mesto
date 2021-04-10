@@ -5,6 +5,19 @@ export default class Api {
         this._groupID = groupID;
     }
 
+    editAvatar(formData) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me/avatar', {
+            method: 'PATCH',
+            headers: {
+                authorization: '71bb88c3-1b7f-415b-b8bb-324cea5ee034',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: formData.link
+            })
+        });
+    }
+
     editProfile(formData) {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
             method: 'PATCH',

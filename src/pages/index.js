@@ -7,7 +7,6 @@ import {
     editAvatarBtn,
     editInfoBtn,
     addBtn,
-    initialCards,
     validationSelectors,
     avatar
 } from "../utils/constants.js";
@@ -35,7 +34,6 @@ const api = new Api({
 
 api.getOwnerInfo()
     .then((result) => {
-        console.log(result);
         document.querySelector(".profile__name").textContent = result.name;
         document.querySelector(".profile__job").textContent = result.about;
         document.querySelector(".profile__avatar").src = result.avatar;
@@ -43,6 +41,7 @@ api.getOwnerInfo()
     })
     .catch(error => alert(error));
 
+/*
 function createCard (data) {
     const card = new Card (
         {
@@ -57,6 +56,30 @@ function createCard (data) {
                         card.deleteCard();
                     })
                     .catch(error => alert(error));
+            }
+        }, ".template");
+    const cardElement = card.generateCard();
+    return cardElement;
+} */
+
+function createCard (data) {
+    const card = new Card (
+        {
+            data,
+            handleCardClick: () => {
+                viewingPhotoPopup.open(data);
+            },
+            handleDelete: () => {
+                const confirmationPopup = new PopupWithForm(".popup_confirm",
+                    function submitForm ({_id}) {
+                    api.deleteCard(card.getId())
+                        .then(() => {
+                            card.deleteCard();
+                        })
+                        .catch(error => alert(error));
+                    confirmationPopup.close();
+                });
+                confirmationPopup.open();
             }
         }, ".template");
     const cardElement = card.generateCard();
@@ -100,8 +123,12 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
-    function submitForm() {
-    avatar.src = avatarInput.value;
+    function submitForm(formData) {
+    api.editAvatar(formData)
+        .then(result => {
+            avatar.src = avatarInput.value;
+        })
+        .catch(error => alert(error));
     });
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
