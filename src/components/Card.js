@@ -8,7 +8,6 @@ export default class Card {
         this._link = data.link;
         this._alt = data.alt;
         this._id = data._id;
-        this._user = data.user;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");

@@ -82,9 +82,10 @@ function createCard (data, ownerID) {
             },
         },
         ".template");
-    const likeCounter = card.getLikeCounter();
-    likeCounter.textContent = data.likes.length;
     const cardElement = card.generateCard();
+    const likeCounter = card.getLikeCounter();
+    const likesAmount = data.likes.length;
+    likeCounter.textContent = likesAmount;
     return cardElement;
 }
 
