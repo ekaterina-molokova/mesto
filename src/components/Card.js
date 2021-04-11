@@ -1,5 +1,6 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
+    constructor({data, handleCardClick, handleDelete, handleLike, handleOwnerID}, cardSelector) {
+        this._handleOwnerID = handleOwnerID;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
@@ -40,6 +41,7 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._alt;
         this._cardImage.name = this._name;
+        this._handleOwnerID(this);
 
         return this._element;
     }

@@ -43,7 +43,7 @@ api.getOwnerInfo()
     })
     .catch(error => alert(error));
 
-function createCard (data, ownerID) {
+function createCard (data) {
     const card = new Card (
         {
             data,
@@ -69,7 +69,7 @@ function createCard (data, ownerID) {
                             card._likeBtn.classList.remove("elements__likebtn_active");
                             likeCounter.textContent = (data.likes.length + 1) - 1;
                         })
-                        .catch(error => alert(error));
+                        .catch(error => console.log(error));
                 } else {
                     api.putLike(card.getId())
                         .then(() => {
@@ -77,15 +77,21 @@ function createCard (data, ownerID) {
                             const likeCounter = card.getLikeCounter();
                             likeCounter.textContent = data.likes.length + 1;
                         })
-                        .catch(error => alert(error));
+                        .catch(error => console.log(error));
+                }
+            },
+            handleOwnerID: ({_deleteBtn}) => {
+                if(data.owner._id !== ownerID) {
+                    _deleteBtn.setAttribute("style", "display: none");
+                } else {
+                    _deleteBtn.setAttribute("style", "display: flex");
                 }
             },
         },
         ".template");
     const cardElement = card.generateCard();
     const likeCounter = card.getLikeCounter();
-    const likesAmount = data.likes.length;
-    likeCounter.textContent = likesAmount;
+    likeCounter.textContent = data.likes.length;
     return cardElement;
 }
 
@@ -98,14 +104,6 @@ api.getInitialCards()
 const cardList = new Section({
         renderer: (item) => {
             cardList.addItem(createCard(item, ownerID));
-            document.querySelectorAll(".elements__deletebtn")
-                .forEach((button) => {
-                   if(item.owner._id !== ownerID) {
-                       button.setAttribute("style", "display: none");
-                   } else {
-                       button.setAttribute("style", "display: flex");
-                   }
-                });
         }
     },
     ".elements");
@@ -115,7 +113,7 @@ const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
     photoAddingPopup.renderLoading(true);
-    api.addNewCard(formData)
+    api.addNewCard({...formData})
         .then(result => {
             cardList.addItem(createCard({...formData, _id: result._id, ownerID}));
         })
