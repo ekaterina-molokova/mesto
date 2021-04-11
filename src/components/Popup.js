@@ -41,6 +41,8 @@ export default class Popup {
     renderLoading(isLoading) {
         if (isLoading) {
             this._submitBtn.textContent = "Сохранение";
+        } else {
+            this._submitBtn.textContent = this._submitBtn.value;
         }
     }
 }
