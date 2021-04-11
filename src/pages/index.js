@@ -68,9 +68,6 @@ function createCard (data, ownerID) {
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
                             likeCounter.textContent = data.likes.length - 1;
-                            if(data.likes.length <= 0) {
-                                likeCounter.textContent = "";
-                            }
                         })
                         .catch(error => alert(error));
                 } else {
@@ -86,6 +83,7 @@ function createCard (data, ownerID) {
         },
         ".template");
     const likeCounter = card.getLikeCounter();
+    likeCounter.textContent = data.likes.length;
     const cardElement = card.generateCard();
     return cardElement;
 }
