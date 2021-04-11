@@ -50,9 +50,10 @@ function createCard (data) {
             handleCardClick: () => {
                 viewingPhotoPopup.open(data);
             },
-            handleDelete: () => {
+            handleDelete: ({_id}) => {
+                console.log(_id);
                 const confirmationPopup = new PopupWithForm(".popup_confirm",
-                    function submitForm ({_id}) {
+                    function submitForm () {
                         api.deleteCard(card.getId())
                             .then(() => {
                                 card.deleteCard();
@@ -67,7 +68,7 @@ function createCard (data) {
                     api.deleteLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
-                            likeCounter.textContent = (data.likes.length + 1) - 1;
+                            likeCounter.textContent = (data.likesCount + 1) - 1;
                         })
                         .catch(error => console.log(error));
                 } else {
@@ -75,13 +76,13 @@ function createCard (data) {
                         .then(() => {
                             card._likeBtn.classList.add("elements__likebtn_active");
                             const likeCounter = card.getLikeCounter();
-                            likeCounter.textContent = data.likes.length + 1;
+                            likeCounter.textContent = data.likesCount + 1;
                         })
                         .catch(error => console.log(error));
                 }
             },
             handleOwnerID: ({_deleteBtn}) => {
-                if(data.owner._id !== ownerID) {
+                if(data.ownerID !== ownerID) {
                     _deleteBtn.setAttribute("style", "display: none");
                 } else {
                     _deleteBtn.setAttribute("style", "display: flex");
@@ -91,7 +92,7 @@ function createCard (data) {
         ".template");
     const cardElement = card.generateCard();
     const likeCounter = card.getLikeCounter();
-    likeCounter.textContent = data.likes.length;
+    likeCounter.textContent = data.likesCount;
     return cardElement;
 }
 
@@ -103,7 +104,7 @@ api.getInitialCards()
 
 const cardList = new Section({
         renderer: (item) => {
-            cardList.addItem(createCard(item, ownerID));
+            cardList.addItem(createCard({...item, _id: item._id, ownerID: item.owner._id, likesCount: item.likes.length}));
         }
     },
     ".elements");
@@ -115,7 +116,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     photoAddingPopup.renderLoading(true);
     api.addNewCard({...formData})
         .then(result => {
-            cardList.addItem(createCard({...formData, _id: result._id, ownerID}));
+            cardList.addItem(createCard({...formData, _id: result._id, ownerID: result.owner._id, likesCount: result.likes.length}));
         })
         .catch(error => console.log(error))
         .finally(() => {
