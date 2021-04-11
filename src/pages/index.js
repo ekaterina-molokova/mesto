@@ -67,7 +67,7 @@ function createCard (data, ownerID) {
                     api.deleteLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
-                            likeCounter.textContent = data.likes.length - 1;
+                            likeCounter.textContent = (data.likes.length + 1) - 1;
                         })
                         .catch(error => alert(error));
                 } else {
