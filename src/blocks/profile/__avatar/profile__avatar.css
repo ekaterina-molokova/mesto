@@ -9,3 +9,8 @@
     background-color: transparent;
     opacity: 1;
 }
+
+.profile__avatar:hover {
+    opacity: 0.4;
+    background-color: #C4C4C4;
+}

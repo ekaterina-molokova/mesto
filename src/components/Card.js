@@ -1,18 +1,20 @@
-import {confirmPopup} from "../pages/index.js";
-import PopupWithForm from "./PopupWithForm";
-
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._handleDelete = handleDelete;
+        this._handleLike = handleLike;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
+        this._id = data._id;
+        this._user = data.user;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");
         this._likeBtn = this._element.querySelector(".elements__likebtn");
         this._deleteBtn = this._element.querySelector(".elements__deletebtn");
+        this._likeCounter = this._element.querySelector(".elements__counter");
     }
 
     _getTemplate() {
@@ -25,6 +27,14 @@ export default class Card {
         return cardElement;
     }
 
+    getId() {
+        return this._id;
+    }
+
+    getLikeCounter() {
+        return this._likeCounter;
+    }
+
     generateCard() {
         this._setEventListeners();
         this._cardTitle.textContent = this._name;
@@ -35,30 +45,19 @@ export default class Card {
         return this._element;
     }
 
-    _setEventListeners() {
-        this._likeBtn.addEventListener("click", () =>
-        {
-            this._handleLike();
-        });
-        this._deleteBtn.addEventListener("click", (event) =>
-        {
-            const targetElement = event.target;
-            console.log(targetElement);
-            const targetItem = targetElement.closest(".elements__element");
-            console.log(targetItem);
-            const confirmPopup = new PopupWithForm(".popup_confirm", targetItem,
-                function submitForm() {
-                targetItem.remove();
-                });
-            confirmPopup.open();
-        });
-        this._cardImage.addEventListener("click", () =>
-        {
-            this._handleCardClick();
-        });
+    deleteCard() {
+        this._element.remove();
     }
 
-    _handleLike() {
-        this._likeBtn.classList.toggle("elements__likebtn_active");
+    _setEventListeners() {
+        this._likeBtn.addEventListener("click", () => {
+            this._handleLike(this);
+        });
+        this._deleteBtn.addEventListener("click", () => {
+            this._handleDelete(this);
+        });
+        this._cardImage.addEventListener("click", () => {
+            this._handleCardClick();
+        });
     }
 }
