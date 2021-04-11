@@ -159,6 +159,9 @@ profileFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(validationSelectors, photoAddingForm);
 addCardFormValidator.enableValidation();
 
+const editAvatarformValidator = new FormValidator(validationSelectors, document.querySelector(".popup_avatar"));
+editAvatarformValidator.enableValidation();
+
 addBtn.addEventListener("click", () => {
     photoAddingPopup.open();
     addCardFormValidator.resetValidation();
@@ -182,8 +185,10 @@ avatar.addEventListener("mouseout", () => {
 
 avatar.addEventListener("click", () => {
     updateAvatarPopup.open();
+    editAvatarformValidator.resetValidation();
 });
 
 editAvatarBtn.addEventListener("click", () => {
     updateAvatarPopup.open();
+    editAvatarformValidator.resetValidation();
 });
