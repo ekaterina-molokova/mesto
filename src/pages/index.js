@@ -68,22 +68,26 @@ function createCard (data, ownerID) {
                     api.deleteLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
-                            const likeCounter = card.getLikeCounter();
-                            likeCounter.textContent = data.likes.length;
+                            likeCounter.textContent = data.likes.length - 1;
+                            if(data.likes.length === 0) {
+                                likeCounter.textContent = 0;
+                            }
                         })
                         .catch(error => alert(error));
                 } else {
                     api.putLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.add("elements__likebtn_active");
+                            console.log(data.likes.length);
                             const likeCounter = card.getLikeCounter();
-                            likeCounter.textContent = data.likes.length;
+                            likeCounter.textContent = data.likes.length + 1;
                         })
                         .catch(error => alert(error));
                 }
             },
         },
         ".template");
+    const likeCounter = card.getLikeCounter();
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -106,7 +110,6 @@ const cardList = new Section({
                        button.setAttribute("style", "display: flex");
                    }
                 });
-
         }
     },
     ".elements");
