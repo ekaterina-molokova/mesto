@@ -147,7 +147,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     updateAvatarPopup.renderLoading(true);
     api.editAvatar(formData)
         .then(result => {
-            avatar.setAttribute("src", `${avatar.src}`);
+            avatar.src = formData.avatar;
         })
         .catch(error => alert(error))
         .finally(() => {
