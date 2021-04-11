@@ -36,7 +36,6 @@ let ownerID;
 
 api.getOwnerInfo()
     .then((result) => {
-        console.log(result);
         document.querySelector(".profile__name").textContent = result.name;
         document.querySelector(".profile__job").textContent = result.about;
         document.querySelector(".profile__avatar").src = result.avatar;
@@ -69,8 +68,8 @@ function createCard (data, ownerID) {
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
                             likeCounter.textContent = data.likes.length - 1;
-                            if(data.likes.length === 0) {
-                                likeCounter.textContent = 0;
+                            if(data.likes.length <= 0) {
+                                likeCounter.textContent = "";
                             }
                         })
                         .catch(error => alert(error));
@@ -78,7 +77,6 @@ function createCard (data, ownerID) {
                     api.putLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.add("elements__likebtn_active");
-                            console.log(data.likes.length);
                             const likeCounter = card.getLikeCounter();
                             likeCounter.textContent = data.likes.length + 1;
                         })
@@ -94,7 +92,6 @@ function createCard (data, ownerID) {
 
 api.getInitialCards()
     .then(cards => {
-        console.log(cards);
         cardList.renderItems(cards);
     })
     .catch(error => alert(error));
@@ -121,7 +118,6 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     photoAddingPopup.renderLoading(true);
     api.addNewCard(formData)
         .then(result => {
-            console.log(result);
             cardList.addItem(createCard({...formData, _id: result._id, ownerID}));
         })
         .catch(error => alert(error))
