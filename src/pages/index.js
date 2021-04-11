@@ -32,16 +32,19 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
+let ownerID;
+
 api.getOwnerInfo()
     .then((result) => {
+        console.log(result);
         document.querySelector(".profile__name").textContent = result.name;
         document.querySelector(".profile__job").textContent = result.about;
         document.querySelector(".profile__avatar").src = result.avatar;
-        const isOwner = result._id;
+        ownerID = result._id;
     })
     .catch(error => alert(error));
 
-function createCard (data) {
+function createCard (data, ownerID) {
     const card = new Card (
         {
             data,
@@ -79,20 +82,31 @@ function createCard (data) {
                         .catch(error => alert(error));
                 }
             },
-        }, ".template");
+        },
+        ".template");
     const cardElement = card.generateCard();
     return cardElement;
 }
 
 api.getInitialCards()
     .then(cards => {
+        console.log(cards);
         cardList.renderItems(cards);
     })
     .catch(error => alert(error));
 
 const cardList = new Section({
         renderer: (item) => {
-            cardList.addItem(createCard(item));
+            cardList.addItem(createCard(item, ownerID));
+            document.querySelectorAll(".elements__deletebtn")
+                .forEach((button) => {
+                   if(item.owner._id !== ownerID) {
+                       button.setAttribute("style", "display: none");
+                   } else {
+                       button.setAttribute("style", "display: flex");
+                   }
+                });
+
         }
     },
     ".elements");
@@ -104,7 +118,8 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     photoAddingPopup.renderLoading(true);
     api.addNewCard(formData)
         .then(result => {
-            cardList.addItem(createCard({...formData, _id: result._id}));
+            console.log(result);
+            cardList.addItem(createCard({...formData, _id: result._id, ownerID}));
         })
         .catch(error => alert(error))
         .finally(() => {
