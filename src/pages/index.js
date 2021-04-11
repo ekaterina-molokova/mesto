@@ -123,7 +123,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
         .catch(error => alert(error))
         .finally(() => {
             photoAddingPopup.renderLoading(false);
-        });
+        })
     photoAddingPopup.close();
     });
 
@@ -139,12 +139,12 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
         .catch(error => alert(error))
         .finally(() => {
             userProfilePopup.renderLoading(false);
-        });
+        })
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
-    updateAvatarPopup.renderLoading(true);
+        updateAvatarPopup.renderLoading(true);
     api.editAvatar(formData)
         .then(result => {
             avatar.src = formData.avatar;
@@ -152,7 +152,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
         .catch(error => alert(error))
         .finally(() => {
             updateAvatarPopup.renderLoading(false);
-        });
+        })
     });
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
@@ -184,10 +184,8 @@ avatar.addEventListener("mouseout", () => {
 
 avatar.addEventListener("click", () => {
     updateAvatarPopup.open();
-    updateAvatarPopup.renderLoading(false);
 });
 
 editAvatarBtn.addEventListener("click", () => {
     updateAvatarPopup.open();
-    updateAvatarPopup.renderLoading(false);
 });
