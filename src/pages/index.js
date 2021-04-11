@@ -57,7 +57,7 @@ function createCard (data) {
                             .then(() => {
                                 card.deleteCard();
                             })
-                            .catch(error => alert(error));
+                            .catch(error => console.log(error));
                         confirmationPopup.close();
                     });
                 confirmationPopup.open();
@@ -117,7 +117,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
         .then(result => {
             cardList.addItem(createCard({...formData, _id: result._id, ownerID}));
         })
-        .catch(error => alert(error))
+        .catch(error => console.log(error))
         .finally(() => {
             photoAddingPopup.renderLoading(false);
         })
