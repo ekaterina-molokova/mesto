@@ -51,9 +51,9 @@ function createCard (data) {
                 viewingPhotoPopup.open(data);
             },
             handleDelete: ({_id}) => {
-                console.log(_id);
                 const confirmationPopup = new PopupWithForm(".popup_confirm",
-                    function submitForm () {
+                    function submitForm ({_id}) {
+                    console.log(_id);
                         api.deleteCard(card.getId())
                             .then(() => {
                                 card.deleteCard();
