@@ -61,11 +61,7 @@ function createCard (data) {
                         confirmationPopup.close();
                         confirmationPopup.delete();
                     });
-                const form = new Section({
-                    renderer: () => {
-                        form.addItem(confirmationPopup.generateForm());
-                    }
-                    }, ".popup_confirm");
+                document.querySelector(".popup_confirm").prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
             handleLike: ({_id}) => {

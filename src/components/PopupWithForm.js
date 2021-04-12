@@ -44,6 +44,7 @@ export default class PopupWithForm extends Popup {
     }
 
     generateForm() {
+        this.setEventListeners();
         return this._element;
     }
 
