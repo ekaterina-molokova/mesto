@@ -52,8 +52,7 @@ function createCard (data) {
             },
             handleDelete: ({_id}) => {
                 const confirmationPopup = new PopupWithForm(".popup_confirm",
-                    function submitForm ({_id}) {
-                    console.log(_id);
+                    function submitForm () {
                         api.deleteCard(card.getId())
                             .then(() => {
                                 card.deleteCard();
