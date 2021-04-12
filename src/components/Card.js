@@ -55,8 +55,6 @@ export default class Card {
             this._handleLike(this);
         });
         this._deleteBtn.addEventListener("click", () => {
-            console.log('delete card:');
-            console.log(this);
             this._handleDelete(this);
         });
         this._cardImage.addEventListener("click", () => {

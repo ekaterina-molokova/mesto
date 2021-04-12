@@ -59,7 +59,13 @@ function createCard (data) {
                             })
                             .catch(error => console.log(error));
                         confirmationPopup.close();
+                        confirmationPopup.delete();
                     });
+                const form = new Section({
+                    renderer: () => {
+                        form.addItem(confirmationPopup.generateForm());
+                    }
+                    }, ".popup_confirm");
                 confirmationPopup.open();
             },
             handleLike: ({_id}) => {
