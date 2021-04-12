@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
         this._formValues = {};
         this._forms = Array.from(document.forms);
         this._element = this._getTemplate();
+        this._submit = this._submit.bind(this);
     }
 
     close(){
@@ -16,14 +17,18 @@ export default class PopupWithForm extends Popup {
         this._forms.forEach((form) => {
             form.reset();
         });
+        this._popup.removeEventListener("submit", this._submit);
     }
+
     setEventListeners() {
         super.setEventListeners();
-        this._popup.addEventListener("submit", (evt) => {
-            evt.preventDefault();
-            this._submitForm(this._getInputValues());
-            this.close();
-        });
+        this._popup.addEventListener("submit", this._submit);
+    }
+
+    _submit(evt) {
+        evt.preventDefault();
+        this._submitForm(this._getInputValues());
+        this.close();
     }
 
     _getInputValues(){
@@ -39,12 +44,10 @@ export default class PopupWithForm extends Popup {
             .content
             .querySelector(".popup__confirmation")
             .cloneNode(true);
-
         return formElement;
     }
 
     generateForm() {
-        this.setEventListeners();
         return this._element;
     }
 
