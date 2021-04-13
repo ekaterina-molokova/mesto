@@ -10,6 +10,7 @@ import {
     validationSelectors,
     avatar
 } from "../utils/constants.js";
+import renderLoading from "../utils/utils.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -56,10 +57,10 @@ function createCard (data) {
                         api.deleteCard(card.getId())
                             .then(() => {
                                 card.deleteCard();
+                                confirmationPopup.close();
+                                confirmationPopup.delete();
                             })
                             .catch(error => console.log(error));
-                        confirmationPopup.close();
-                        confirmationPopup.delete();
                     });
                 document.querySelector(".popup_confirm").prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
@@ -114,43 +115,45 @@ const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
-    photoAddingPopup.renderLoading(true);
+    renderLoading(true, ".popup_photo-adding-form");
     api.addNewCard({...formData})
         .then(result => {
             cardList.addItem(createCard({...formData, _id: result._id, ownerID: result.owner._id, likesCount: result.likes.length}));
+            photoAddingPopup.close();
         })
         .catch(error => console.log(error))
         .finally(() => {
-            photoAddingPopup.renderLoading(false);
+            renderLoading(false, ".popup_photo-adding-form");
         })
-    photoAddingPopup.close();
     });
 
 const user = new UserInfo(".profile__name", ".profile__job");
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    userProfilePopup.renderLoading(true);
+    renderLoading(true, ".popup_profile-info-form");
     api.editProfile(formData)
             .then(result => {
                 user.setUserInfo(formData);
+                userProfilePopup.close();
             })
         .catch(error => alert(error))
         .finally(() => {
-            userProfilePopup.renderLoading(false);
+            renderLoading(false, ".popup_profile-info-form");
         })
     });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
-        updateAvatarPopup.renderLoading(true);
-    api.editAvatar(formData)
+        renderLoading(true, ".popup_avatar");
+    api.editAvatar({avatar})
         .then(result => {
             avatar.src = formData.avatar;
+            updateAvatarPopup.close();
         })
         .catch(error => alert(error))
         .finally(() => {
-            updateAvatarPopup.renderLoading(false);
+            renderLoading(false, ".popup_avatar");
         })
     });
 
@@ -177,11 +180,11 @@ editInfoBtn.addEventListener("click", () => {
 });
 
 avatar.addEventListener("mouseover", () => {
-    editAvatarBtn.setAttribute("style", "display: flex");
+    editAvatarBtn.classList.add("profile__editbtn_avatar_visible");
 });
 
 avatar.addEventListener("mouseout", () => {
-    editAvatarBtn.setAttribute("style", "display: none");
+    editAvatarBtn.classList.remove("profile__editbtn_avatar_visible");
 });
 
 avatar.addEventListener("click", () => {

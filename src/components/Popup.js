@@ -8,8 +8,8 @@ export default class Popup {
     }
 
     open() {
-        this._popup.classList.add("popup_opened");
         this.setEventListeners();
+        this._popup.classList.add("popup_opened");
         document.addEventListener("keydown", this._closeViaEsc);
     }
 
@@ -35,13 +35,5 @@ export default class Popup {
                 this.close();
             }
         });
-    }
-
-    renderLoading(isLoading) {
-        if (isLoading) {
-            this._submitBtn.textContent = "Сохранение";
-        } else {
-            this._submitBtn.textContent = this._submitBtn.value;
-        }
     }
 }

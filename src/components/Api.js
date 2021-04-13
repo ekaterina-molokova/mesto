@@ -5,6 +5,9 @@ export default class Api {
         this._groupID = groupID;
     }
 
+    /* Проверка ответа сервера и преобразование из json дублируются во всех методах класса Api,
+    cледует вынести в отдельный метод, например, _getResponseData, и переиспользовать */
+
     deleteLike(_id) {
         return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${_id}`, {
             method: "DElETE",
@@ -16,7 +19,7 @@ export default class Api {
                 if(response.ok) {
                     return Promise.resolve("done");
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             })
     }
 
@@ -45,7 +48,13 @@ export default class Api {
             body: JSON.stringify({
                 avatar:document.querySelector(".popup__avatar-link").value
             })
-        });
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            });
     }
 
     editProfile(formData) {
@@ -59,7 +68,13 @@ export default class Api {
                 name: formData.name,
                 about: formData.job
             })
-        });
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+            });
     }
 
     getOwnerInfo() {
@@ -122,7 +137,7 @@ export default class Api {
                 if(response.ok) {
                     return Promise.resolve("done");
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             })
     }
 }
