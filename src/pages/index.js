@@ -59,15 +59,24 @@ function createCard (data) {
                 confirmationPopup.open();
             },
             handleLike: ({_id}) => {
-                api.deleteLike(card.getId())
-                        .then(() => {
-                            card.deleteLike();
-                        })
-                        .catch(error => console.log(error))
-                    api.putLike(card.getId())
-                        .then(() => {
-                            card.putLike();
-                        })
+                const likeBtns = document.querySelectorAll(".elements__likebtn");
+                likeBtns.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        if(button.classList.contains("elements__likebtn_active")) {
+                            api.deleteLike(card.getId())
+                                .then(() => {
+                                    card.deleteLike();
+                                })
+                                .catch(error => console.log(error))
+                        } else {
+                            api.putLike(card.getId())
+                                .then(() => {
+                                    card.putLike();
+                                })
+                                .catch(error => console.log(error))
+                        }
+                    });
+                });
             },
         },
         ".template");
@@ -76,7 +85,10 @@ function createCard (data) {
     api.getOwnerInfo()
         .then((result) => {
             const owner = user.getUserInfo(result);
+            console.log(owner);
             card.handleUserID(owner);
+            user.setUserAvatar(owner.avatar);
+            user.setUserInfo({name: owner.name, job: owner.job});
         })
         .catch(error => console.log(error));
     return cardElement;
@@ -173,6 +185,7 @@ editInfoBtn.addEventListener("click", () => {
         const {name, job} = user.getUserInfo(
             {name: document.querySelector(".profile__name").textContent,
                 job: document.querySelector(".profile__job").textContent});
+        console.log(name, job);
         nameInput.value = name;
         jobInput.value = job;
 });

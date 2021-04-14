@@ -34,10 +34,12 @@ export default class Card {
 
     putLike () {
         this._likeCounter.textContent = this._likesCount + 1;
+        this._likeBtn.classList.add("elements__likebtn_active");
     }
 
     deleteLike () {
         this._likeCounter.textContent = (this._likesCount + 1) - 1;
+        this._likeBtn.classList.remove("elements__likebtn_active");
     }
 
     generateCard() {
@@ -57,8 +59,7 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._likeBtn.addEventListener("click", () => {
-            this._likeBtn.classList.toggle("elements__likebtn_active");
+        this._likeBtn.addEventListener("mouseover", () => {
             this._handleLike(this);
         });
         this._deleteBtn.addEventListener("click", () => {
