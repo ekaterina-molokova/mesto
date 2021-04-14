@@ -1,8 +1,24 @@
+import {avatarInput} from "../utils/constants";
+
 export default class Api {
     constructor({address, token, groupID}) {
         this._address = address;
         this._token = token;
         this._groupID = groupID;
+    }
+
+    _getResponseData (response) {
+        if(response.ok) {
+            return Promise.resolve("done");
+        }
+        return Promise.reject(new Error(`Ошибка: ${response.status}`));
+    }
+
+    _getResponseJson (response) {
+        if(response.ok) {
+            return response.json();
+        }
+        return Promise.reject(new Error(`Ошибка: ${response.status}`));
     }
 
     deleteLike(_id) {
@@ -13,10 +29,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return Promise.resolve("done");
-                }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                this._getResponseData(response);
             })
     }
 
@@ -28,14 +41,11 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                this._getResponseJson(response);
             });
     }
 
-    editAvatar(formData) {
+    editAvatar(avatar) {
         return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
@@ -43,9 +53,12 @@ export default class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                avatar:document.querySelector(".popup__avatar-link").value
+                avatar
             })
-        });
+        })
+            .then(response => {
+                this._getResponseJson(response);
+            });
     }
 
     editProfile(formData) {
@@ -59,7 +72,10 @@ export default class Api {
                 name: formData.name,
                 about: formData.job
             })
-        });
+        })
+            .then(response => {
+                this._getResponseJson(response);
+            });
     }
 
     getOwnerInfo() {
@@ -72,7 +88,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             });
     }
 
@@ -83,11 +99,11 @@ export default class Api {
             }
         })
             .then(response => {
-            if(response.ok) {
-                return response.json();
-            }
-            return Promise.reject(`Что-то пошло не так: ${response.status}`);
-        });
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+            });
     }
 
     addNewCard(formData) {
@@ -107,7 +123,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             })
     }
 
@@ -119,10 +135,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return Promise.resolve("done");
-                }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                this._getResponseData(response);
             })
     }
 }

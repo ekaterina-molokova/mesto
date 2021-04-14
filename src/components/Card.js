@@ -1,6 +1,5 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete, handleLike, handleOwnerID}, cardSelector) {
-        this._handleOwnerID = handleOwnerID;
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
@@ -8,7 +7,9 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
-        this._id = data._id;
+        this._id = data.id;
+        this._userID = data.userID;
+        this._likesCount = data.likesCount;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");
@@ -31,8 +32,14 @@ export default class Card {
         return this._id;
     }
 
-    getLikeCounter() {
-        return this._likeCounter;
+    putLike () {
+        this._likeCounter.textContent = this._likesCount + 1;
+        this._likeBtn.classList.add("elements__likebtn_active");
+    }
+
+    deleteLike () {
+        this._likeCounter.textContent = (this._likesCount + 1) - 1;
+        this._likeBtn.classList.remove("elements__likebtn_active");
     }
 
     generateCard() {
@@ -41,24 +48,33 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._alt;
         this._cardImage.name = this._name;
-        this._handleOwnerID(this);
+        this._likeCounter.textContent = this._likesCount;
 
         return this._element;
     }
 
     deleteCard() {
         this._element.remove();
+        this._element = null;
     }
 
     _setEventListeners() {
-        this._likeBtn.addEventListener("click", () => {
+        this._likeBtn.addEventListener("mouseover", () => {
             this._handleLike(this);
         });
         this._deleteBtn.addEventListener("click", () => {
             this._handleDelete(this);
         });
         this._cardImage.addEventListener("click", () => {
-            this._handleCardClick();
+            this._handleCardClick(this._name, this._link);
         });
+    }
+
+    handleUserID (owner) {
+        if(this._userID !== owner.id) {
+            this._deleteBtn.classList.add("elements__deletebtn_hidden");
+        } else {
+            this._deleteBtn.classList.remove("elements__deletebtn_hidden");
+        }
     }
 }
