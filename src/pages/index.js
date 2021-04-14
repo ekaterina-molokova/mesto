@@ -146,7 +146,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     console.log(avatar);
     api.editAvatar(avatar)
         .then(result => {
-            avatarImage.src = avatar;
+            user.setUserAvatar(avatar);
             updateAvatarPopup.close();
         })
         .catch(error => console.log(error))
