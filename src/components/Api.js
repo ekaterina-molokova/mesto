@@ -5,8 +5,12 @@ export default class Api {
         this._groupID = groupID;
     }
 
-    /* Проверка ответа сервера и преобразование из json дублируются во всех методах класса Api,
-    cледует вынести в отдельный метод, например, _getResponseData, и переиспользовать */
+    _getResponseData (response) {
+        if(response.ok) {
+            return Promise.resolve("done");
+        }
+        return Promise.reject(new Error(`Ошибка: ${response.status}`));
+    }
 
     deleteLike(_id) {
         return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${_id}`, {
@@ -16,10 +20,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return Promise.resolve("done");
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                this._getResponseData(response);
             })
     }
 
@@ -34,7 +35,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             });
     }
 
@@ -53,7 +54,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             });
     }
 
@@ -73,7 +74,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             });
     }
 
@@ -87,7 +88,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             });
     }
 
@@ -98,11 +99,11 @@ export default class Api {
             }
         })
             .then(response => {
-            if(response.ok) {
-                return response.json();
-            }
-            return Promise.reject(`Что-то пошло не так: ${response.status}`);
-        });
+                if(response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+            });
     }
 
     addNewCard(formData) {
@@ -122,7 +123,7 @@ export default class Api {
                 if(response.ok) {
                     return response.json();
                 }
-                return Promise.reject(`Что-то пошло не так: ${response.status}`);
+                return Promise.reject(new Error(`Ошибка: ${response.status}`));
             })
     }
 
@@ -134,10 +135,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return Promise.resolve("done");
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                this._getResponseData(response);
             })
     }
 }

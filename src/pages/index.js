@@ -43,7 +43,7 @@ api.getOwnerInfo()
         document.querySelector(".profile__avatar").src = result.avatar;
         ownerID = result._id;
     })
-    .catch(error => alert(error));
+    .catch(error => console.log(error));
 
 function createCard (data) {
     const card = new Card (
@@ -103,7 +103,7 @@ api.getInitialCards()
     .then(cards => {
         cardList.renderItems(cards);
     })
-    .catch(error => alert(error));
+    .catch(error => console.log(error));
 
 const cardList = new Section({
         renderer: (item) => {
@@ -138,7 +138,7 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
                 user.setUserInfo(formData);
                 userProfilePopup.close();
             })
-        .catch(error => alert(error))
+        .catch(error => console.log(error))
         .finally(() => {
             renderLoading(false, ".popup_profile-info-form");
         })
@@ -152,7 +152,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
             avatar.src = formData.avatar;
             updateAvatarPopup.close();
         })
-        .catch(error => alert(error))
+        .catch(error => console.log(error))
         .finally(() => {
             renderLoading(false, ".popup_avatar");
         })
