@@ -47,9 +47,9 @@ function createCard (data) {
             handleCardClick: () => {
                 viewingPhotoPopup.open(data);
             },
-            handleDelete: ({_id}) => {
+            handleDelete: ({id}) => {
                 const confirmationPopup = new PopupWithConfirmation(".popup_confirm",
-                    function submitForm () {
+                    function submitForm ({id}) {
                     api.deleteCard(card.getId())
                         .then(() => {
                             card.deleteCard();
@@ -61,8 +61,9 @@ function createCard (data) {
                 document.querySelector(".popup_confirm").prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
-            handleLike: ({_id}) => {
-                if(card._likeBtn.classList.contains("elements__likebtn_active")) {
+            handleLike: ({id}) => {
+                console.log(id);
+                /* if(card._likeBtn.classList.contains("elements__likebtn_active")) {
                     api.deleteLike(card.getId())
                         .then(() => {
                             card._likeBtn.classList.remove("elements__likebtn_active");
@@ -77,14 +78,15 @@ function createCard (data) {
                             likeCounter.textContent = data.likesCount + 1;
                         })
                         .catch(error => console.log(error));
-                }
+                } */
             },
             handleOwnerID: ({_deleteBtn}) => {
-                if(data.ownerID !== ownerID) {
+                /* if(data.ownerID !== owner.id) {
                     _deleteBtn.setAttribute("style", "display: none");
                 } else {
                     _deleteBtn.setAttribute("style", "display: flex");
-                }
+                } */
+                console.log({_deleteBtn});
             },
         },
         ".template");
@@ -102,7 +104,7 @@ api.getInitialCards()
 
 const cardList = new Section({
         renderer: (item) => {
-            cardList.addItem(createCard({...item, _id: item._id, ownerID: item.owner._id, likesCount: item.likes.length}));
+            cardList.addItem(createCard({...item, id: item._id, userID: item.owner._id, likesCount: item.likes.length}))
         }
     },
     ".elements");
@@ -114,7 +116,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     renderLoading(true, ".popup_photo-adding-form");
     api.addNewCard({...formData})
         .then(result => {
-            cardList.addItem(createCard({...formData, _id: result._id, ownerID: result.owner._id, likesCount: result.likes.length}));
+            cardList.addItem(createCard({...formData, id: result._id, userID: result.owner._id, likesCount: result.likes.length}));
             photoAddingPopup.close();
         })
         .catch(error => console.log(error))
@@ -143,7 +145,6 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
     renderLoading(true, ".popup_avatar");
     const {avatar} = user.getUserInfo(formData);
-    console.log(avatar);
     api.editAvatar(avatar)
         .then(result => {
             user.setUserAvatar(avatar);
