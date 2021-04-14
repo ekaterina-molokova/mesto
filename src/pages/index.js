@@ -34,12 +34,6 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
-api.getOwnerInfo()
-    .then((result) => {
-        const owner = user.getUserInfo(result);
-    })
-    .catch(error => console.log(error));
-
 function createCard (data) {
     const card = new Card (
         {
@@ -62,37 +56,15 @@ function createCard (data) {
                     .prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
-            handleLike: ({id}) => {
-                console.log(id);
-                /* if(card._likeBtn.classList.contains("elements__likebtn_active")) {
-                    api.deleteLike(card.getId())
-                        .then(() => {
-                            card._likeBtn.classList.remove("elements__likebtn_active");
-                            likeCounter.textContent = (data.likesCount + 1) - 1;
-                        })
-                        .catch(error => console.log(error));
-                } else {
-                    api.putLike(card.getId())
-                        .then(() => {
-                            card._likeBtn.classList.add("elements__likebtn_active");
-                            const likeCounter = card.getLikeCounter();
-                            likeCounter.textContent = data.likesCount + 1;
-                        })
-                        .catch(error => console.log(error));
-                } */
-            },
         },
         ".template");
     const cardElement = card.generateCard();
-    console.log(card);
     api.getOwnerInfo()
         .then((result) => {
             const owner = user.getUserInfo(result);
             card.handleUserID(owner);
         })
         .catch(error => console.log(error));
-    const likeCounter = card.getLikeCounter();
-    likeCounter.textContent = data.likesCount;
     return cardElement;
 }
 
