@@ -1,6 +1,5 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete, handleLike, handleOwnerID}, cardSelector) {
-        this._handleOwnerID = handleOwnerID;
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
@@ -8,7 +7,8 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
-        this._id = data._id;
+        this._id = data.id;
+        this._userID = data.userID;
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".elements__photo");
         this._cardTitle = this._element.querySelector(".elements__title");
@@ -41,7 +41,6 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._alt;
         this._cardImage.name = this._name;
-        this._handleOwnerID(this);
 
         return this._element;
     }
@@ -62,4 +61,13 @@ export default class Card {
             this._handleCardClick(this._name, this._link);
         });
     }
+
+    handleUserID (owner) {
+        if(this._userID !== owner.id) {
+            this._deleteBtn.classList.add("elements__deletebtn_hidden");
+        } else {
+            this._deleteBtn.classList.remove("elements__deletebtn_hidden");
+        }
+    }
+
 }

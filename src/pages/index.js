@@ -47,9 +47,9 @@ function createCard (data) {
             handleCardClick: () => {
                 viewingPhotoPopup.open(data);
             },
-            handleDelete: ({id}) => {
+            handleDelete: () => {
                 const confirmationPopup = new PopupWithConfirmation(".popup_confirm",
-                    function submitForm ({id}) {
+                    function submitForm () {
                     api.deleteCard(card.getId())
                         .then(() => {
                             card.deleteCard();
@@ -58,7 +58,8 @@ function createCard (data) {
                         })
                         .catch(error => console.log(error));
                 });
-                document.querySelector(".popup_confirm").prepend(confirmationPopup.generateForm());
+                document.querySelector(".popup_confirm")
+                    .prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
             handleLike: ({id}) => {
@@ -80,17 +81,16 @@ function createCard (data) {
                         .catch(error => console.log(error));
                 } */
             },
-            handleOwnerID: ({_deleteBtn}) => {
-                /* if(data.ownerID !== owner.id) {
-                    _deleteBtn.setAttribute("style", "display: none");
-                } else {
-                    _deleteBtn.setAttribute("style", "display: flex");
-                } */
-                console.log({_deleteBtn});
-            },
         },
         ".template");
     const cardElement = card.generateCard();
+    console.log(card);
+    api.getOwnerInfo()
+        .then((result) => {
+            const owner = user.getUserInfo(result);
+            card.handleUserID(owner);
+        })
+        .catch(error => console.log(error));
     const likeCounter = card.getLikeCounter();
     likeCounter.textContent = data.likesCount;
     return cardElement;
