@@ -34,14 +34,9 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
-let ownerID;
-
 api.getOwnerInfo()
     .then((result) => {
-        document.querySelector(".profile__name").textContent = result.name;
-        document.querySelector(".profile__job").textContent = result.about;
-        document.querySelector(".profile__avatar").src = result.avatar;
-        ownerID = result._id;
+        const owner = user.getUserInfo(result);
     })
     .catch(error => console.log(error));
 
@@ -148,12 +143,10 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
     renderLoading(true, ".popup_avatar");
     const {avatar} = user.getUserInfo(formData);
-    console.log({avatar});
-
-    api.editAvatar({avatar})
+    console.log(avatar);
+    api.editAvatar(avatar)
         .then(result => {
-            console.log(result);
-            avatarImage.src = result.avatar;
+            avatarImage.src = avatar;
             updateAvatarPopup.close();
         })
         .catch(error => console.log(error))
