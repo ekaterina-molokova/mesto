@@ -1,10 +1,9 @@
-import {avatarInput} from "../utils/constants";
-
 export default class Api {
     constructor({address, token, groupID}) {
         this._address = address;
         this._token = token;
         this._groupID = groupID;
+        this._getResponseJson = this._getResponseJson.bind(this);
     }
 
     _getResponseData (response) {
@@ -70,7 +69,7 @@ export default class Api {
             },
             body: JSON.stringify({
                 name: formData.name,
-                about: formData.job
+                about: formData.about
             })
         })
             .then(response => {

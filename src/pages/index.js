@@ -34,6 +34,8 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
+let owner;
+
 function createCard (data) {
     const card = new Card (
         {
@@ -82,13 +84,13 @@ function createCard (data) {
 
     api.getOwnerInfo()
         .then((result) => {
-            const owner = user.getUserInfo(result);
-            /* console.log(owner); */
+            owner = user.getUserInfo(result);
             card.handleUserID(owner);
             user.setUserAvatar(owner.avatar);
-            user.setUserInfo({name: owner.name, job: owner.job});
+            user.setUserInfo({name: owner.name, about: owner.about});
         })
         .catch(error => console.log(error));
+
     return cardElement;
 }
 
@@ -137,9 +139,10 @@ const user = new UserInfo(".profile__name", ".profile__job", ".profile__avatar")
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
     renderLoading(true, ".popup_profile-info-form");
-    api.editProfile(formData)
-            .then(result => {
-                user.setUserInfo(formData);
+    const {name, about} = user.getUserInfo(formData);
+    api.editProfile({name, about})
+            .then(() => {
+                user.setUserInfo({name, about});
                 userProfilePopup.close();
             })
         .catch(error => console.log(error))
@@ -153,7 +156,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     renderLoading(true, ".popup_avatar");
     const {avatar} = user.getUserInfo(formData);
     api.editAvatar(avatar)
-        .then(result => {
+        .then(() => {
             user.setUserAvatar(avatar);
             updateAvatarPopup.close();
         })
@@ -177,15 +180,22 @@ addBtn.addEventListener("click", () => {
     addCardFormValidator.resetValidation();
 });
 
+/*
 editInfoBtn.addEventListener("click", () => {
         userProfilePopup.open();
         profileFormValidator.resetValidation();
-        const {name, job} = user.getUserInfo(
-            {name: document.querySelector(".profile__name").textContent,
-                job: document.querySelector(".profile__job").textContent});
-        console.log(name, job);
+        const {name, about} = user.getUserInfo();
         nameInput.value = name;
-        jobInput.value = job;
+        jobInput.value = about;
+        console.log(name, about);
+}); */
+
+editInfoBtn.addEventListener("click", () => {
+    userProfilePopup.open();
+    profileFormValidator.resetValidation();
+    const {name, about} = user.getUserInfo(owner);
+    nameInput.value = name;
+    jobInput.value = about;
 });
 
 avatarImage.addEventListener("mouseover", () => {
