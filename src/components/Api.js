@@ -12,6 +12,13 @@ export default class Api {
         return Promise.reject(new Error(`Ошибка: ${response.status}`));
     }
 
+    _getResponseJson (response) {
+        if(response.ok) {
+            return response.json();
+        }
+        return Promise.reject(new Error(`Ошибка: ${response.status}`));
+    }
+
     deleteLike(_id) {
         return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${_id}`, {
             method: "DElETE",
@@ -32,10 +39,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                this._getResponseJson(response);
             });
     }
 
@@ -51,10 +55,7 @@ export default class Api {
             })
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                this._getResponseJson(response);
             });
     }
 
@@ -71,10 +72,7 @@ export default class Api {
             })
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                this._getResponseJson(response);
             });
     }
 
