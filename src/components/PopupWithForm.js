@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
         this._formValues = {};
         this._forms = Array.from(document.forms);
         this._submit = this._submit.bind(this);
+        this.setEventListeners();
     }
 
     close(){

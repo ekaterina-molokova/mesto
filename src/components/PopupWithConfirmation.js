@@ -5,6 +5,7 @@ export default class PopupWithConfirmation extends Popup {
         this._submitForm = submitForm;
         this._submit = this._submit.bind(this);
         this._element = this._getTemplate();
+        this.setEventListeners();
     }
 
     _getTemplate() {

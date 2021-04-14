@@ -3,7 +3,6 @@ import {
     photoAddingForm,
     nameInput,
     jobInput,
-    avatarInput,
     editAvatarBtn,
     editInfoBtn,
     addBtn,
