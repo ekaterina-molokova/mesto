@@ -4,11 +4,9 @@ export default class Popup {
         this._popupSelector = popupSelector;
         this._popup = document.querySelector(this._popupSelector);
         this._closeViaEsc = this._closeViaEsc.bind(this);
-        this._submitBtn = this._popup.querySelector(".popup__submitbtn");
     }
 
     open() {
-        this.setEventListeners();
         this._popup.classList.add("popup_opened");
         document.addEventListener("keydown", this._closeViaEsc);
     }
