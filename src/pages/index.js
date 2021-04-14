@@ -16,6 +16,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "./index.css";
@@ -52,16 +53,16 @@ function createCard (data) {
                 viewingPhotoPopup.open(data);
             },
             handleDelete: ({_id}) => {
-                const confirmationPopup = new PopupWithForm(".popup_confirm",
+                const confirmationPopup = new PopupWithConfirmation(".popup_confirm",
                     function submitForm () {
-                        api.deleteCard(card.getId())
-                            .then(() => {
-                                card.deleteCard();
-                                confirmationPopup.close();
-                                confirmationPopup.delete();
-                            })
-                            .catch(error => console.log(error));
-                    });
+                    api.deleteCard(card.getId())
+                        .then(() => {
+                            card.deleteCard();
+                            confirmationPopup.close();
+                            confirmationPopup.delete();
+                        })
+                        .catch(error => console.log(error));
+                });
                 document.querySelector(".popup_confirm").prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
