@@ -59,7 +59,7 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._likeBtn.addEventListener("mouseover", () => {
+        this._likeBtn.addEventListener("click", () => {
             this._handleLike(this);
         });
         this._deleteBtn.addEventListener("click", () => {

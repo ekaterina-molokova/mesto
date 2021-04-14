@@ -61,7 +61,6 @@ function createCard (data) {
             handleLike: ({_id}) => {
                 const likeBtns = document.querySelectorAll(".elements__likebtn");
                 likeBtns.forEach((button) => {
-                    button.addEventListener("click", () => {
                         if(button.classList.contains("elements__likebtn_active")) {
                             api.deleteLike(card.getId())
                                 .then(() => {
@@ -76,7 +75,6 @@ function createCard (data) {
                                 .catch(error => console.log(error))
                         }
                     });
-                });
             },
         },
         ".template");
@@ -85,7 +83,7 @@ function createCard (data) {
     api.getOwnerInfo()
         .then((result) => {
             const owner = user.getUserInfo(result);
-            console.log(owner);
+            /* console.log(owner); */
             card.handleUserID(owner);
             user.setUserAvatar(owner.avatar);
             user.setUserInfo({name: owner.name, job: owner.job});
