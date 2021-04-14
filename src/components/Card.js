@@ -42,6 +42,10 @@ export default class Card {
         this._likeBtn.classList.remove("elements__likebtn_active");
     }
 
+    buttonLiked() {
+        return this._likeBtn.classList.contains("elements__likebtn_active");
+    }
+
     generateCard() {
         this._setEventListeners();
         this._cardTitle.textContent = this._name;
@@ -71,7 +75,7 @@ export default class Card {
     }
 
     handleUserID (owner) {
-        if(this._userID !== owner.id) {
+        if (this._userID !== owner.id) {
             this._deleteBtn.classList.add("elements__deletebtn_hidden");
         } else {
             this._deleteBtn.classList.remove("elements__deletebtn_hidden");

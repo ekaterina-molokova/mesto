@@ -61,22 +61,19 @@ function createCard (data) {
                 confirmationPopup.open();
             },
             handleLike: ({_id}) => {
-                const likeBtns = document.querySelectorAll(".elements__likebtn");
-                likeBtns.forEach((button) => {
-                        if(button.classList.contains("elements__likebtn_active")) {
-                            api.deleteLike(card.getId())
-                                .then(() => {
-                                    card.deleteLike();
-                                })
-                                .catch(error => console.log(error))
-                        } else {
-                            api.putLike(card.getId())
-                                .then(() => {
-                                    card.putLike();
-                                })
-                                .catch(error => console.log(error))
-                        }
-                    });
+                if (!card.buttonLiked()) {
+                    api.putLike(card.getId())
+                        .then(() => {
+                            card.putLike();
+                        })
+                        .catch(error => console.log(error))
+                } else {
+                    api.deleteLike(card.getId())
+                        .then(() => {
+                            card.deleteLike();
+                        })
+                        .catch(error => console.log(error))
+                }
             },
         },
         ".template");
@@ -179,16 +176,6 @@ addBtn.addEventListener("click", () => {
     photoAddingPopup.open();
     addCardFormValidator.resetValidation();
 });
-
-/*
-editInfoBtn.addEventListener("click", () => {
-        userProfilePopup.open();
-        profileFormValidator.resetValidation();
-        const {name, about} = user.getUserInfo();
-        nameInput.value = name;
-        jobInput.value = about;
-        console.log(name, about);
-}); */
 
 editInfoBtn.addEventListener("click", () => {
     userProfilePopup.open();
