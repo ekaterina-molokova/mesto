@@ -1,8 +1,9 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDelete}, cardSelector) {
+    constructor({data, handleCardClick, handleDelete, handleLike}, cardSelector) {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDelete = handleDelete;
+        this._handleLike = handleLike;
         this._name = data.name;
         this._link = data.link;
         this._alt = data.alt;
@@ -15,7 +16,6 @@ export default class Card {
         this._likeBtn = this._element.querySelector(".elements__likebtn");
         this._deleteBtn = this._element.querySelector(".elements__deletebtn");
         this._likeCounter = this._element.querySelector(".elements__counter");
-        this._likes = this.getLikeCounter();
     }
 
     _getTemplate() {
@@ -32,8 +32,12 @@ export default class Card {
         return this._id;
     }
 
-    getLikeCounter() {
-        return this._likeCounter;
+    putLike () {
+        this._likeCounter.textContent = this._likesCount + 1;
+    }
+
+    deleteLike () {
+        this._likeCounter.textContent = (this._likesCount + 1) - 1;
     }
 
     generateCard() {
@@ -42,7 +46,7 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._alt;
         this._cardImage.name = this._name;
-        this._likes.textContent = this._likesCount;
+        this._likeCounter.textContent = this._likesCount;
 
         return this._element;
     }
@@ -55,19 +59,13 @@ export default class Card {
     _setEventListeners() {
         this._likeBtn.addEventListener("click", () => {
             this._likeBtn.classList.toggle("elements__likebtn_active");
+            this._handleLike(this);
         });
         this._deleteBtn.addEventListener("click", () => {
             this._handleDelete(this);
         });
         this._cardImage.addEventListener("click", () => {
             this._handleCardClick(this._name, this._link);
-        });
-        this._likeBtn.addEventListener("click", () => {
-            if (this._likeBtn.classList.contains("elements__likebtn_active")) {
-                this._likes.textContent = this._likesCount + 1;
-            } else {
-                this._likes.textContent = (this._likesCount + 1) - 1;
-            }
         });
     }
 

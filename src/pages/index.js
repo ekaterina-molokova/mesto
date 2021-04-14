@@ -56,9 +56,21 @@ function createCard (data) {
                     .prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
             },
+            handleLike: ({_id}) => {
+                api.deleteLike(card.getId())
+                        .then(() => {
+                            card.deleteLike();
+                        })
+                        .catch(error => console.log(error))
+                    api.putLike(card.getId())
+                        .then(() => {
+                            card.putLike();
+                        })
+            },
         },
         ".template");
     const cardElement = card.generateCard();
+
     api.getOwnerInfo()
         .then((result) => {
             const owner = user.getUserInfo(result);
@@ -67,6 +79,17 @@ function createCard (data) {
         .catch(error => console.log(error));
     return cardElement;
 }
+
+Promise.all([
+    api.getOwnerInfo(),
+    api.getInitialCards()
+])
+    .then((values) => {
+        return values;
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 api.getInitialCards()
     .then(cards => {
