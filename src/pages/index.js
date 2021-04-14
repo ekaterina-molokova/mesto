@@ -44,9 +44,11 @@ function createCard (data) {
             handleDelete: () => {
                 const confirmationPopup = new PopupWithConfirmation(".popup_confirm",
                     function submitForm () {
+                    renderLoading(true, ".popup_confirm");
                     api.deleteCard(card.getId())
                         .then(() => {
                             card.deleteCard();
+                            renderLoading(false, ".popup_confirm");
                             confirmationPopup.close();
                             confirmationPopup.delete();
                         })
