@@ -12,7 +12,7 @@ const addBtn = document.querySelector(".profile__addbtn");
 
 const escape = "Escape";
 
-const avatar = document.querySelector(".profile__avatar");
+const avatarImage = document.querySelector(".profile__avatar");
 
 const initialCards = [
     {
@@ -56,4 +56,4 @@ const validationSelectors = {
     errorClass: "popup__input-error-message_active"
 }
 
-export {profileInfoForm, photoAddingForm, nameInput, jobInput, avatarInput, editInfoBtn, editAvatarBtn, addBtn, initialCards, validationSelectors, escape, avatar}
+export {profileInfoForm, photoAddingForm, nameInput, jobInput, avatarInput, editInfoBtn, editAvatarBtn, addBtn, initialCards, validationSelectors, escape, avatarImage}

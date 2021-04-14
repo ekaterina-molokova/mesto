@@ -8,7 +8,7 @@ import {
     editInfoBtn,
     addBtn,
     validationSelectors,
-    avatar
+    avatarImage
 } from "../utils/constants.js";
 import renderLoading from "../utils/utils.js";
 import Card from "../components/Card.js";
@@ -128,7 +128,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
         })
     });
 
-const user = new UserInfo(".profile__name", ".profile__job");
+const user = new UserInfo(".profile__name", ".profile__job", ".profile__avatar");
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
@@ -146,17 +146,21 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
-        renderLoading(true, ".popup_avatar");
+    renderLoading(true, ".popup_avatar");
+    const {avatar} = user.getUserInfo(formData);
+    console.log({avatar});
+
     api.editAvatar({avatar})
         .then(result => {
-            avatar.src = formData.avatar;
+            console.log(result);
+            avatarImage.src = result.avatar;
             updateAvatarPopup.close();
         })
         .catch(error => console.log(error))
         .finally(() => {
             renderLoading(false, ".popup_avatar");
         })
-    });
+});
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
@@ -180,15 +184,15 @@ editInfoBtn.addEventListener("click", () => {
         jobInput.value = job;
 });
 
-avatar.addEventListener("mouseover", () => {
+avatarImage.addEventListener("mouseover", () => {
     editAvatarBtn.classList.add("profile__editbtn_avatar_visible");
 });
 
-avatar.addEventListener("mouseout", () => {
+avatarImage.addEventListener("mouseout", () => {
     editAvatarBtn.classList.remove("profile__editbtn_avatar_visible");
 });
 
-avatar.addEventListener("click", () => {
+avatarImage.addEventListener("click", () => {
     updateAvatarPopup.open();
     editAvatarformValidator.resetValidation();
 });

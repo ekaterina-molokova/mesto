@@ -43,7 +43,7 @@ export default class Api {
             });
     }
 
-    editAvatar(formData) {
+    editAvatar({avatar}) {
         return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
@@ -51,7 +51,7 @@ export default class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                avatar:document.querySelector(".popup__avatar-link").value
+        avatar: {avatar}
             })
         })
             .then(response => {
