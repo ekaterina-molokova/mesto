@@ -77,16 +77,16 @@ function createCard (data) {
         },
         ".template");
     const cardElement = card.generateCard();
+    card.handleUserID(owner);
 
-    api.getOwnerInfo()
-        .then((result) => {
+    /* api.getOwnerInfo()
+       .then((result) => {
             owner = user.getUserInfo(result);
             card.handleUserID(owner);
             user.setUserAvatar(owner.avatar);
             user.setUserInfo({name: owner.name, about: owner.about});
         })
-        .catch(error => console.log(error));
-
+        .catch(error => console.log(error)); */
     return cardElement;
 }
 
@@ -94,18 +94,23 @@ Promise.all([
     api.getOwnerInfo(),
     api.getInitialCards()
 ])
-    .then((values) => {
-        return values;
+    .then((result) => {
+        console.log(result[0]);
+        console.log(result[1]);
+        owner = user.getUserInfo(result[0]);
+        user.setUserAvatar(owner.avatar);
+        user.setUserInfo({name: owner.name, about: owner.about});
+        cardList.renderItems(result[1]);
     })
     .catch((err) => {
         console.log(err);
     });
 
-api.getInitialCards()
+/* api.getInitialCards()
     .then(cards => {
         cardList.renderItems(cards);
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error)); */
 
 const cardList = new Section({
         renderer: (item) => {
