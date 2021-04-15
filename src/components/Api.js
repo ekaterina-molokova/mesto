@@ -28,7 +28,7 @@ export default class Api {
             }
         })
             .then(response => {
-                this._getResponseData(response);
+                return this._getResponseData(response);
             })
     }
 
@@ -40,7 +40,7 @@ export default class Api {
             }
         })
             .then(response => {
-                this._getResponseJson(response);
+                return this._getResponseJson(response);
             });
     }
 
@@ -56,7 +56,7 @@ export default class Api {
             })
         })
             .then(response => {
-                this._getResponseJson(response);
+                return this._getResponseJson(response);
             });
     }
 
@@ -73,7 +73,7 @@ export default class Api {
             })
         })
             .then(response => {
-                this._getResponseJson(response);
+                return this._getResponseJson(response);
             });
     }
 
@@ -84,10 +84,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+               return this._getResponseJson(response);
             });
     }
 
@@ -98,10 +95,7 @@ export default class Api {
             }
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                return this._getResponseJson(response);
             });
     }
 
@@ -119,10 +113,7 @@ export default class Api {
                 })
             })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error(`Ошибка: ${response.status}`));
+                return this._getResponseJson(response);
             })
     }
 
@@ -134,7 +125,7 @@ export default class Api {
             }
         })
             .then(response => {
-                this._getResponseData(response);
+                return this._getResponseData(response);
             })
     }
 }

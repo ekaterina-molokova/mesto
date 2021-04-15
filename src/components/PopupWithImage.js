@@ -5,6 +5,7 @@ export default class PopupWithImage extends Popup {
         super(popupSelector);
         this._widePhoto = document.querySelector(".popup__wide-photo");
         this._widePhotoFigcaption = document.querySelector(".popup__figcaption");
+        this.setEventListeners();
     }
     open(item){
         super.open();
