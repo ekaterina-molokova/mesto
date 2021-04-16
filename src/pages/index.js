@@ -35,6 +35,21 @@ const api = new Api({
 
 let owner;
 
+Promise.all([
+    api.getOwnerInfo(),
+    api.getInitialCards()
+])
+    .then((result) => {
+        const [ownerInfo, initialCards] = result;
+        owner = user.getUserInfo(ownerInfo);
+        user.setUserAvatar(owner.avatar);
+        user.setUserInfo({name: owner.name, about: owner.about});
+        cardList.renderItems(initialCards);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
 function createCard (data) {
     const card = new Card (
         {
@@ -80,21 +95,6 @@ function createCard (data) {
     card.handleUserID(owner);
     return cardElement;
 }
-
-Promise.all([
-    api.getOwnerInfo(),
-    api.getInitialCards()
-])
-    .then((result) => {
-        const [ownerInfo, initialCards] = result;
-        owner = user.getUserInfo(ownerInfo);
-        user.setUserAvatar(owner.avatar);
-        user.setUserInfo({name: owner.name, about: owner.about});
-        cardList.renderItems(initialCards);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 
 const cardList = new Section({
         renderer: (item) => {
