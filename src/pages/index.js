@@ -98,7 +98,11 @@ function createCard (data) {
 
 const cardList = new Section({
         renderer: (item) => {
-            cardList.addItem(createCard({...item, id: item._id, userID: item.owner._id, likesCount: item.likes.length}))
+            cardList.addItem(createCard({
+                ...item,
+                id: item._id,
+                userID: item.owner._id,
+                likesCount: item.likes.length}))
         }
     },
     ".elements");
@@ -107,50 +111,54 @@ const viewingPhotoPopup = new PopupWithImage(".popup_viewing-photo");
 
 const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
     function submitForm(formData) {
-    renderLoading(true, ".popup_photo-adding-form");
-    api.addNewCard({...formData})
-        .then(result => {
-            cardList.addItem(createCard({...formData, id: result._id, userID: result.owner._id, likesCount: result.likes.length}));
-            photoAddingPopup.close();
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-            renderLoading(false, ".popup_photo-adding-form");
-        })
-    });
+        renderLoading(true, ".popup_photo-adding-form");
+        api.addNewCard({...formData})
+            .then(result => {
+                cardList.addItem(createCard({
+                    ...formData,
+                    id: result._id,
+                    userID: result.owner._id,
+                    likesCount: result.likes.length}));
+                photoAddingPopup.close();
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+                renderLoading(false, ".popup_photo-adding-form");
+            })
+});
 
 const user = new UserInfo(".profile__name", ".profile__job", ".profile__avatar");
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
         renderLoading(true, ".popup_profile-info-form");
-    const {name, about} = user.getUserInfo(formData);
-    owner.name = name;
-    owner.about = about;
-    api.editProfile({name, about})
+        const {name, about} = user.getUserInfo(formData);
+        owner.name = name;
+        owner.about = about;
+        api.editProfile({name, about})
             .then(() => {
                 user.setUserInfo({name, about});
                 userProfilePopup.close();
             })
-        .catch(error => console.log(error))
-        .finally(() => {
-            renderLoading(false, ".popup_profile-info-form");
-        })
-    });
+            .catch(error => console.log(error))
+            .finally(() => {
+                renderLoading(false, ".popup_profile-info-form");
+            })
+});
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
-    renderLoading(true, ".popup_avatar");
-    const {avatar} = user.getUserInfo(formData);
-    api.editAvatar(avatar)
-        .then(() => {
-            user.setUserAvatar(avatar);
-            updateAvatarPopup.close();
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-            renderLoading(false, ".popup_avatar");
-        })
+        renderLoading(true, ".popup_avatar");
+        const {avatar} = user.getUserInfo(formData);
+        api.editAvatar(avatar)
+            .then(() => {
+                user.setUserAvatar(avatar);
+                updateAvatarPopup.close();
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+                renderLoading(false, ".popup_avatar");
+            })
 });
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
