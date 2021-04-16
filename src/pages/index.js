@@ -123,8 +123,10 @@ const user = new UserInfo(".profile__name", ".profile__job", ".profile__avatar")
 
 const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
-    renderLoading(true, ".popup_profile-info-form");
+        renderLoading(true, ".popup_profile-info-form");
     const {name, about} = user.getUserInfo(formData);
+    owner.name = name;
+    owner.about = about;
     api.editProfile({name, about})
             .then(() => {
                 user.setUserInfo({name, about});
