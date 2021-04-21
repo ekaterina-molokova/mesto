@@ -33,17 +33,16 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
-let owner;
-
 Promise.all([
     api.getOwnerInfo(),
     api.getInitialCards()
 ])
     .then((result) => {
         const [ownerInfo, initialCards] = result;
-        owner = user.getUserInfo(ownerInfo);
-        user.setUserAvatar(owner.avatar);
-        user.setUserInfo({name: owner.name, about: owner.about});
+        user.setUserAvatar(ownerInfo.avatar);
+        user.setUserInfo({name: ownerInfo.name, about: ownerInfo.about});
+        document.querySelector(".profile__name").textContent = ownerInfo.name;
+        document.querySelector(".profile__job").textContent = ownerInfo.about;
         cardList.renderItems(initialCards);
     })
     .catch((err) => {
@@ -92,7 +91,7 @@ function createCard (data) {
         },
         ".template");
     const cardElement = card.generateCard();
-    card.handleUserID(owner);
+    card.handleUserID(user.getUserInfo(data));
     return cardElement;
 }
 
@@ -133,8 +132,8 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
         renderLoading(true, ".popup_profile-info-form");
         const {name, about} = user.getUserInfo(formData);
-        owner.name = name;
-        owner.about = about;
+        document.querySelector(".profile__name").textContent = name;
+        document.querySelector(".profile__job").textContent = about;
         api.editProfile({name, about})
             .then(() => {
                 user.setUserInfo({name, about});
@@ -178,9 +177,8 @@ addBtn.addEventListener("click", () => {
 editInfoBtn.addEventListener("click", () => {
     userProfilePopup.open();
     profileFormValidator.resetValidation();
-    const {name, about} = user.getUserInfo(owner);
-    nameInput.value = name;
-    jobInput.value = about;
+    nameInput.value = document.querySelector(".profile__name").textContent;
+    jobInput.value = document.querySelector(".profile__job").textContent;
 });
 
 avatarImage.addEventListener("mouseover", () => {
