@@ -33,16 +33,17 @@ const api = new Api({
     groupID: "cohort-22"
 });
 
+let owner;
+
 Promise.all([
     api.getOwnerInfo(),
     api.getInitialCards()
 ])
     .then((result) => {
         const [ownerInfo, initialCards] = result;
-        user.setUserAvatar(ownerInfo.avatar);
-        user.setUserInfo({name: ownerInfo.name, about: ownerInfo.about});
-        document.querySelector(".profile__name").textContent = ownerInfo.name;
-        document.querySelector(".profile__job").textContent = ownerInfo.about;
+        owner = user.getUserInfo(ownerInfo);
+        user.setUserAvatar(owner.avatar);
+        user.setUserInfo({name: owner.name, about: owner.about});
         cardList.renderItems(initialCards);
     })
     .catch((err) => {
@@ -59,16 +60,16 @@ function createCard (data) {
             handleDelete: () => {
                 const confirmationPopup = new PopupWithConfirmation(".popup_confirm",
                     function submitForm () {
-                    renderLoading(true, ".popup_confirm");
-                    api.deleteCard(card.getId())
-                        .then(() => {
-                            card.deleteCard();
-                            renderLoading(false, ".popup_confirm");
-                            confirmationPopup.close();
-                            confirmationPopup.delete();
-                        })
-                        .catch(error => console.log(error));
-                });
+                        renderLoading(true, ".popup_confirm");
+                        api.deleteCard(card.getId())
+                            .then(() => {
+                                card.deleteCard();
+                                renderLoading(false, ".popup_confirm");
+                                confirmationPopup.close();
+                                confirmationPopup.delete();
+                            })
+                            .catch(error => console.log(error));
+                    });
                 document.querySelector(".popup_confirm")
                     .prepend(confirmationPopup.generateForm());
                 confirmationPopup.open();
@@ -91,7 +92,7 @@ function createCard (data) {
         },
         ".template");
     const cardElement = card.generateCard();
-    card.handleUserID(user.getUserInfo(data));
+    card.handleUserID(owner);
     return cardElement;
 }
 
@@ -124,7 +125,7 @@ const photoAddingPopup = new PopupWithForm(".popup_photo-adding-form",
             .finally(() => {
                 renderLoading(false, ".popup_photo-adding-form");
             })
-});
+    });
 
 const user = new UserInfo(".profile__name", ".profile__job", ".profile__avatar");
 
@@ -132,8 +133,8 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
     function submitForm(formData) {
         renderLoading(true, ".popup_profile-info-form");
         const {name, about} = user.getUserInfo(formData);
-        document.querySelector(".profile__name").textContent = name;
-        document.querySelector(".profile__job").textContent = about;
+        owner.name = name;
+        owner.about = about;
         api.editProfile({name, about})
             .then(() => {
                 user.setUserInfo({name, about});
@@ -143,7 +144,7 @@ const userProfilePopup = new PopupWithForm(".popup_profile-info-form",
             .finally(() => {
                 renderLoading(false, ".popup_profile-info-form");
             })
-});
+    });
 
 const updateAvatarPopup = new PopupWithForm(".popup_avatar",
     function submitForm(formData) {
@@ -158,7 +159,7 @@ const updateAvatarPopup = new PopupWithForm(".popup_avatar",
             .finally(() => {
                 renderLoading(false, ".popup_avatar");
             })
-});
+    });
 
 const profileFormValidator = new FormValidator(validationSelectors, profileInfoForm);
 profileFormValidator.enableValidation();
@@ -177,8 +178,9 @@ addBtn.addEventListener("click", () => {
 editInfoBtn.addEventListener("click", () => {
     userProfilePopup.open();
     profileFormValidator.resetValidation();
-    nameInput.value = document.querySelector(".profile__name").textContent;
-    jobInput.value = document.querySelector(".profile__job").textContent;
+    const {name, about} = user.getUserInfo(owner);
+    nameInput.value = name;
+    jobInput.value = about;
 });
 
 avatarImage.addEventListener("mouseover", () => {
